@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li id="nav-branding">
+                <h2>Jotun Asia</h2>
+            </li>
+            <li>
+                Home
+            </li>
+            <li>
+                Choose Colors
+            </li>
+            <li>
+                Tools
+            </li>
+            <li>
+                About Us
+            </li>
+        </ul>
+    </nav>
+    <div id="photoEditor"> 
+        <canvas id="photoEditor-canvas" width="500" height="500"></canvas>
+        <div id="photoEditor-toolbox">
+            <div id="photoEditor-toolbox-colors">
+            </div>
+            <div id="photoEditor-toolbox-upload">
+                <input type="file" accept="image/*" id="uploadInput" style="visibility: hidden;">
+                <button id="uploadImage">
+                    <ion-icon name="cloud-upload-outline"></ion-icon>
+                    <h2> Upload Image </h2>
+                </button>
+                <div id="photoEditor-toolbox-upload-image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="../js/colorChoose.js"></script>
+</body>
+</html>

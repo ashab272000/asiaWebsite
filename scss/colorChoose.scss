@@ -1,0 +1,174 @@
+@import"configure";
+@import"base";
+@import"navigation";
+
+#canvas{
+    position: relative;
+}
+
+#photoEditor{
+
+    width: 100%;
+    height: calc(100vh - 100px);
+    padding: 100px 0px 0px 0px;
+    background-color: #222;
+    display: block;
+
+    #editor-container{
+        width: fit-content;
+    }
+    &-canvas{
+        float: left;
+        border: 2px solid $primaryColor;
+        margin-right: 50px;
+
+    }
+    &-toolbox{
+        float: left;
+        margin: 0px;
+        width: 300px;
+        height: 500px;
+        border: 2px solid $primaryColor;
+        justify-content: center;
+        &-colors{
+            margin-top: 0px;
+            display: block;
+            height: 300px;
+            border-bottom: 1px solid $primaryColor;
+
+            .fav{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                margin: 0px;
+                padding: 20px 0px;
+                justify-content: center;
+                    
+                .favColor{
+                    margin-right: 30px;
+                    margin-left: 30px;
+                    border: 1px solid $primaryColor;
+                }
+                h4{
+                    width: 120px;
+                    color: $primaryColor;
+                    margin-top: 10px;
+                    text-align: center;
+                    vertical-align: center;
+                }
+            }
+            .selected{
+                background-color:$primaryColor;
+                .favColor{
+                    border-color: white;
+                }
+                h4{
+                    color: white;
+                }
+            }
+        }
+        &-upload{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            button{
+                margin: 10px;
+                background: none;
+                border: 1px solid $primaryColor;
+                width: 200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 7px;
+
+                *{
+                    margin: 0px 5px ;
+                }
+                
+                ion-icon{
+                    font-size: 32px;
+                    color: $primaryColor;
+                }
+
+            }
+            button:hover{
+                background-color: $primaryColor;
+                *{
+                    color: white;
+                }
+            }
+
+        }
+
+    }
+}
+
+#colors-window{
+    visibility: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    //display: flex;
+    //justify-content: center;
+
+    
+    #blur-background{
+        display: block;
+        background: rgba($color:$textColor, $alpha: 1);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 7;
+        h2{
+            text-align: center;
+            font-size: 32px;
+            margin-top: 15px;
+            margin-bottom: -30px;
+        }
+        #cancel-window{
+            display: block;
+            position: fixed;
+            right: 25px;
+            top: 10px;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 25px;
+            #bar1{
+                display: inline-block;
+                position: absolute;
+                top: 10px;
+                left: 23px;
+                width: 4px;
+                height: 30px;
+                margin: 0px;
+                background: rgba($color:$textColor, $alpha: 1);
+                transform: rotate(45deg);
+
+            }
+            #bar2{
+                display: inline-block;
+                position: absolute;
+                top: 10px;
+                left: 23px;
+                width: 4px;
+                height: 30px;
+                margin: 0px;
+                background: rgba($color:$textColor, $alpha: 1);
+                transform: rotate(135deg);
+            }
+        }
+        #colors-container{
+            display: flex;
+            flex-wrap: wrap;
+            flex: start;
+            overflow-y: visible;
+            width: 70%;
+            z-index: 8;
+            margin: 8vh 15% 2vh 15%;
+        }
+    }
+
+}

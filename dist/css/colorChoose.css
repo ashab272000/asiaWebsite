@@ -1,0 +1,164 @@
+* {
+  text-decoration: none;
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+  color: #2d3436; }
+
+h2 {
+  margin-bottom: 20px;
+  color: #70C1ff;
+  font-weight: 600; }
+
+nav {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  padding: 10px 0;
+  z-index: 1; }
+  nav ul {
+    display: flex;
+    align-items: baseline;
+    justify-content: center; }
+    nav ul li {
+      padding-top: 10px;
+      padding-bottom: 8px;
+      margin: 0px 20px;
+      color: #70C1ff;
+      font-weight: 500; }
+    nav ul #nav-branding {
+      padding-top: 0px; }
+      nav ul #nav-branding h2 {
+        color: #70C1ff;
+        font-weight: 500; }
+
+#canvas {
+  position: relative; }
+
+#photoEditor {
+  width: 100%;
+  height: calc(100vh - 100px);
+  padding: 100px 0px 0px 0px;
+  background-color: #222;
+  display: block; }
+  #photoEditor #editor-container {
+    width: fit-content; }
+  #photoEditor-canvas {
+    float: left;
+    border: 2px solid #70C1ff;
+    margin-right: 50px; }
+  #photoEditor-toolbox {
+    float: left;
+    margin: 0px;
+    width: 300px;
+    height: 500px;
+    border: 2px solid #70C1ff;
+    justify-content: center; }
+    #photoEditor-toolbox-colors {
+      margin-top: 0px;
+      display: block;
+      height: 300px;
+      border-bottom: 1px solid #70C1ff; }
+      #photoEditor-toolbox-colors .fav {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin: 0px;
+        padding: 20px 0px;
+        justify-content: center; }
+        #photoEditor-toolbox-colors .fav .favColor {
+          margin-right: 30px;
+          margin-left: 30px;
+          border: 1px solid #70C1ff; }
+        #photoEditor-toolbox-colors .fav h4 {
+          width: 120px;
+          color: #70C1ff;
+          margin-top: 10px;
+          text-align: center;
+          vertical-align: center; }
+      #photoEditor-toolbox-colors .selected {
+        background-color: #70C1ff; }
+        #photoEditor-toolbox-colors .selected .favColor {
+          border-color: white; }
+        #photoEditor-toolbox-colors .selected h4 {
+          color: white; }
+    #photoEditor-toolbox-upload {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
+      #photoEditor-toolbox-upload button {
+        margin: 10px;
+        background: none;
+        border: 1px solid #70C1ff;
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 7px; }
+        #photoEditor-toolbox-upload button * {
+          margin: 0px 5px; }
+        #photoEditor-toolbox-upload button ion-icon {
+          font-size: 32px;
+          color: #70C1ff; }
+      #photoEditor-toolbox-upload button:hover {
+        background-color: #70C1ff; }
+        #photoEditor-toolbox-upload button:hover * {
+          color: white; }
+
+#colors-window {
+  visibility: hidden;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0; }
+  #colors-window #blur-background {
+    display: block;
+    background: #2d3436;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 7; }
+    #colors-window #blur-background h2 {
+      text-align: center;
+      font-size: 32px;
+      margin-top: 15px;
+      margin-bottom: -30px; }
+    #colors-window #blur-background #cancel-window {
+      display: block;
+      position: fixed;
+      right: 25px;
+      top: 10px;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 25px; }
+      #colors-window #blur-background #cancel-window #bar1 {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 23px;
+        width: 4px;
+        height: 30px;
+        margin: 0px;
+        background: #2d3436;
+        transform: rotate(45deg); }
+      #colors-window #blur-background #cancel-window #bar2 {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 23px;
+        width: 4px;
+        height: 30px;
+        margin: 0px;
+        background: #2d3436;
+        transform: rotate(135deg); }
+    #colors-window #blur-background #colors-container {
+      display: flex;
+      flex-wrap: wrap;
+      flex: start;
+      overflow-y: visible;
+      width: 70%;
+      z-index: 8;
+      margin: 8vh 15% 2vh 15%; }

@@ -1,0 +1,30 @@
+nav{
+    position: absolute;
+    width: 100%;
+    //background-color: rgba($color: $textColor, $alpha:0.8);
+    height: 70px;
+    padding: 10px 0;
+    z-index: 1;
+    //border-bottom: 1px solid $textColor;
+    ul{
+        display: flex;
+        align-items: baseline;
+        justify-content: center  ;
+
+        li{
+            
+            padding-top: 10px;
+            padding-bottom: 8px;
+            margin: 0px 20px;
+            color: $primaryColor;
+            font-weight: 500;
+        }
+        #nav-branding{
+            padding-top: 0px;
+            h2{
+                color: $primaryColor;
+                font-weight: 500;
+            }
+        }
+    }
+}

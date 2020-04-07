@@ -1,18 +1,8 @@
 @import"configure";
-*{
-    text-decoration: none;
-    padding: 0px;
-    margin: 0px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow-x: hidden;
-    color: $textColor;
-}
-h2{
-    margin-bottom: 20px;
-    color: $primaryColor;
-    font-weight: 600;
-}
+@import"base";
+@import"navigation";
 
+/*
 nav{
     position: absolute;
     width: 100%;
@@ -43,7 +33,7 @@ nav{
         }
     }
 }
-
+*/
 #sildeshow{
     position: relative;
     width: 100%;
@@ -194,73 +184,5 @@ nav{
                 margin: 0 30px;
             }
         }
-    }
-}
-#canvas{
-    position: relative;
-}
-
-#photoEditor{
-    width: 100%;
-    height: calc(100vh - 70px);
-    padding: 70px 50px 0px 50px;
-    background-color: #222;
-    display: flex;
-    //justify-content: center;
-    &-canvas{
-        width: 500px;
-        height: 500px;
-        margin: 0px 50px;
-        border: 2px solid $primaryColor;
-    }
-    &-toolbox{
-        display: flex;
-        flex-direction: column;
-        width: 300px;
-        height: 500px;
-        border: 2px solid $primaryColor;
-        &-colors{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            height: 300px;
-            border-bottom: 1px solid $primaryColor;
-            .colorTool{
-                margin: 25px;
-                width:70px;
-                height:70px;
-            }
-        }
-        &-upload{
-            width: 300px;
-            height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            button{
-                margin: 10px;
-                background: none;
-                border: 1px solid $primaryColor;
-                width: 200px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 7px;
-
-                *{
-                    margin: 0px 5px ;
-                }
-                
-                ion-icon{
-                    font-size: 32px;
-                    color: $primaryColor;
-                }
-
-            }
-
-        }
-
     }
 }

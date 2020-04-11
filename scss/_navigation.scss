@@ -1,11 +1,25 @@
 nav{
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
     width: 100%;
     //background-color: rgba($color: $textColor, $alpha:0.8);
+    //height: auto;
     height: 70px;
     padding: 10px 0;
     z-index: 1;
     //border-bottom: 1px solid $textColor;
+    #mobileNavButton{
+        display: none;
+    }
+    #nav-branding{
+        padding-top: 0px;
+        margin-right: 20px;
+        color: $primaryColor;
+        font-weight: 500;
+        
+    }
     ul{
         display: flex;
         align-items: baseline;
@@ -19,12 +33,189 @@ nav{
             color: $primaryColor;
             font-weight: 500;
         }
-        #nav-branding{
-            padding-top: 0px;
-            h2{
-                color: $primaryColor;
-                font-weight: 500;
+    }
+}
+
+footer{
+    width: 100%;
+    height: 400px;
+    background-color: $textColor;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 50px 20px 0 20px;
+    
+
+    .contact-group{
+        display: flex;
+        flex-direction: column;
+        width: 220px;
+        
+        &-card{
+            margin: 0 0 20px 0;
+            display: flex;
+            &-text{
+                margin: 0 0 0 20px;
+                h2{
+                    font-weight: 400 ;
+                    font-size: 24px;
+                    margin-bottom: 5px;
+                }
+                p{
+                    color:$primaryColor;
+                }
             }
+
+            &-icon{
+                width: 60px;
+                height: 60px;
+                background-color: white;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px ;
+                ion-icon{
+                    font-size: 32px;
+                    text-align: center;
+                    color: $primaryColor;
+                }
+            }
+            
+        }
+    }
+
+    .v-seperator{
+        width: 1px;
+        height: 300px;
+        display: block;
+        margin: -20px 25px 0 25px;
+        background: $primaryColor;
+    }
+    #link-group{
+        width: 220px;
+        margin:  0 0 0 25px;
+        h2{
+            font-size: 24px;
+            font-weight: 400;
+        }
+        ul{
+        
+            li{
+                a{
+                    color: white;
+                    
+                }
+    
+                margin: 0 0 30px 0;
+            }
+        }
+    }
+}
+
+@include mediaSm{
+    nav{
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        background-color: $primaryColor;
+        height: auto;
+        padding: 0px;
+
+        #mainNav{
+            display: none;
+        }
+
+        #mobileNavButton{
+            display: block;
+            position: absolute;
+            overflow: hidden;
+            right: 15px;
+            top: 7px;
+            width:50px;
+            height: 50px;
+            .bar{
+                display: block;
+                position: absolute;
+                width: 30px;
+                height: 3px;
+                background: white;
+                right: 0px;
+                z-index: 10;
+                transition: transform 0.5s, opacity 0.5s, top 0.5s;
+            }
+            
+        }
+
+        .navUnselected{
+            #bar1{
+                top:10px;
+            }
+            #bar2{
+                top: 20px;
+                opacity: 1;
+            }
+            #bar3{
+                top: 30px
+            }
+        }
+        .navSelected{
+            .bar{
+                position: absolute;
+                z-index: 10;
+                top: 20px;
+            }
+            #bar2{
+                opacity: 0;
+            }
+            #bar1{
+                transform: rotate(135deg);
+            }
+            #bar3{
+                transform: rotate(-135deg);
+            }
+        }
+
+        #nav-branding{
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding: 10px 0;
+            margin: 0px 0px 7px 0px;
+        }
+    
+        ul{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            //height: auto;
+            li{
+                width: 100%;
+                text-align: center;
+                color: white;
+                margin: 0px;
+            }
+        }
+    }
+
+    footer{
+        .contact-group{
+            margin-left: -25px;
+            &-card{
+                h2{
+                    font-size: 18px;
+                }
+                p{
+                    font-size: 11px;
+                }
+            }
+        }
+        .v-seperator{
+            display: none;
+        }
+        #link-group{
+            display: none;
         }
     }
 }

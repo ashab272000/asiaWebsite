@@ -6,17 +6,30 @@
   overflow-x: hidden;
   color: #2d3436; }
 
+div {
+  overflow: hidden; }
+
 h2 {
   margin-bottom: 20px;
-  color: #70C1ff;
+  color: #6495ED;
   font-weight: 600; }
 
 nav {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
   width: 100%;
   height: 70px;
   padding: 10px 0;
   z-index: 1; }
+  nav #mobileNavButton {
+    display: none; }
+  nav #nav-branding {
+    padding-top: 0px;
+    margin-right: 20px;
+    color: #6495ED;
+    font-weight: 500; }
   nav ul {
     display: flex;
     align-items: baseline;
@@ -25,13 +38,132 @@ nav {
       padding-top: 10px;
       padding-bottom: 8px;
       margin: 0px 20px;
-      color: #70C1ff;
+      color: #6495ED;
       font-weight: 500; }
-    nav ul #nav-branding {
-      padding-top: 0px; }
-      nav ul #nav-branding h2 {
-        color: #70C1ff;
-        font-weight: 500; }
+
+footer {
+  width: 100%;
+  height: 400px;
+  background-color: #2d3436;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 50px 20px 0 20px; }
+  footer .contact-group {
+    display: flex;
+    flex-direction: column;
+    width: 220px; }
+    footer .contact-group-card {
+      margin: 0 0 20px 0;
+      display: flex; }
+      footer .contact-group-card-text {
+        margin: 0 0 0 20px; }
+        footer .contact-group-card-text h2 {
+          font-weight: 400;
+          font-size: 24px;
+          margin-bottom: 5px; }
+        footer .contact-group-card-text p {
+          color: #6495ED; }
+      footer .contact-group-card-icon {
+        width: 60px;
+        height: 60px;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px; }
+        footer .contact-group-card-icon ion-icon {
+          font-size: 32px;
+          text-align: center;
+          color: #6495ED; }
+  footer .v-seperator {
+    width: 1px;
+    height: 300px;
+    display: block;
+    margin: -20px 25px 0 25px;
+    background: #6495ED; }
+  footer #link-group {
+    width: 220px;
+    margin: 0 0 0 25px; }
+    footer #link-group h2 {
+      font-size: 24px;
+      font-weight: 400; }
+    footer #link-group ul li {
+      margin: 0 0 30px 0; }
+      footer #link-group ul li a {
+        color: white; }
+
+@media screen and (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background-color: #6495ED;
+    height: auto;
+    padding: 0px; }
+    nav #mainNav {
+      display: none; }
+    nav #mobileNavButton {
+      display: block;
+      position: absolute;
+      overflow: hidden;
+      right: 15px;
+      top: 7px;
+      width: 50px;
+      height: 50px; }
+      nav #mobileNavButton .bar {
+        display: block;
+        position: absolute;
+        width: 30px;
+        height: 3px;
+        background: white;
+        right: 0px;
+        z-index: 10;
+        transition: transform 0.5s, opacity 0.5s, top 0.5s; }
+    nav .navUnselected #bar1 {
+      top: 10px; }
+    nav .navUnselected #bar2 {
+      top: 20px;
+      opacity: 1; }
+    nav .navUnselected #bar3 {
+      top: 30px; }
+    nav .navSelected .bar {
+      position: absolute;
+      z-index: 10;
+      top: 20px; }
+    nav .navSelected #bar2 {
+      opacity: 0; }
+    nav .navSelected #bar1 {
+      transform: rotate(135deg); }
+    nav .navSelected #bar3 {
+      transform: rotate(-135deg); }
+    nav #nav-branding {
+      width: 100%;
+      text-align: center;
+      color: white;
+      padding: 10px 0;
+      margin: 0px 0px 7px 0px; }
+    nav ul {
+      display: flex;
+      flex-direction: column;
+      width: 100%; }
+      nav ul li {
+        width: 100%;
+        text-align: center;
+        color: white;
+        margin: 0px; }
+  footer .contact-group {
+    margin-left: -25px; }
+    footer .contact-group-card h2 {
+      font-size: 18px; }
+    footer .contact-group-card p {
+      font-size: 11px; }
+  footer .v-seperator {
+    display: none; }
+  footer #link-group {
+    display: none; } }
 
 #canvas {
   position: relative; }
@@ -46,20 +178,20 @@ nav {
     width: fit-content; }
   #photoEditor-canvas {
     float: left;
-    border: 2px solid #70C1ff;
+    border: 2px solid #6495ED;
     margin-right: 50px; }
   #photoEditor-toolbox {
     float: left;
     margin: 0px;
     width: 300px;
     height: 500px;
-    border: 2px solid #70C1ff;
+    border: 2px solid #6495ED;
     justify-content: center; }
     #photoEditor-toolbox-colors {
       margin-top: 0px;
       display: block;
       height: 300px;
-      border-bottom: 1px solid #70C1ff; }
+      border-bottom: 1px solid #6495ED; }
       #photoEditor-toolbox-colors .fav {
         display: flex;
         flex-direction: row;
@@ -70,15 +202,15 @@ nav {
         #photoEditor-toolbox-colors .fav .favColor {
           margin-right: 30px;
           margin-left: 30px;
-          border: 1px solid #70C1ff; }
+          border: 1px solid #6495ED; }
         #photoEditor-toolbox-colors .fav h4 {
           width: 120px;
-          color: #70C1ff;
+          color: #6495ED;
           margin-top: 10px;
           text-align: center;
           vertical-align: center; }
       #photoEditor-toolbox-colors .selected {
-        background-color: #70C1ff; }
+        background-color: #6495ED; }
         #photoEditor-toolbox-colors .selected .favColor {
           border-color: white; }
         #photoEditor-toolbox-colors .selected h4 {
@@ -91,7 +223,7 @@ nav {
       #photoEditor-toolbox-upload button {
         margin: 10px;
         background: none;
-        border: 1px solid #70C1ff;
+        border: 1px solid #6495ED;
         width: 200px;
         display: flex;
         justify-content: center;
@@ -101,9 +233,9 @@ nav {
           margin: 0px 5px; }
         #photoEditor-toolbox-upload button ion-icon {
           font-size: 32px;
-          color: #70C1ff; }
+          color: #6495ED; }
       #photoEditor-toolbox-upload button:hover {
-        background-color: #70C1ff; }
+        background-color: #6495ED; }
         #photoEditor-toolbox-upload button:hover * {
           color: white; }
 

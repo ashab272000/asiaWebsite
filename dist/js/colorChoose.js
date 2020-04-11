@@ -507,10 +507,17 @@ const setUpCanvas = () => {
     canvas.height = baseCanvasHeight;
     rect.width = canvas.width;
     rect.height = canvas.height;
-    //get the margin left to setu
-    //let margin = (innerWidth - editor.style.width)/2;S
     let margin = (innerWidth - rect.width - 50 - toolbox.offsetWidth)/2;
     editor.style.marginLeft =  ""+ margin + "px";
+    if(innerWidth <= 960)
+    {
+        canvas.width = innerWidth - 50;
+        rect.width = canvas.width;
+        editor.style.marginLeft =  "25px";
+        editor.style.marginRight = "25px";
+    }
+    //get the margin left to setu
+    //let margin = (innerWidth - editor.style.width)/2;S
     //editor.style.marginLeft = "50px";
 
     //toolbox.style.

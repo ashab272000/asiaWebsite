@@ -9,10 +9,13 @@
 </head>
 <body>
     <nav>
-        <ul>
-            <li id="nav-branding">
-                <h2>Jotun Asia</h2>
-            </li>
+        <div id="mobileNavButton" class="navUnselected" onclick="navSelection()">
+            <div id="bar1" class="bar"></div>
+            <div id="bar2" class="bar"></div>
+            <div id="bar3" class="bar"></div>
+        </div>
+        <h2 id="nav-branding">Jotun Asia</h2>
+        <ul id="mainNav">
             <li>
                 Home
             </li>
@@ -32,10 +35,10 @@
         
         <div class="sildeshowText">
             <div class="container">
-                <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+                <h1>Decorate your home</h1>
                 <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt esse doloremque alias fuga, sint reiciendis?</h3>
                 <button id="colorChoose">
-                    Choose Color
+                    Decorate
                 </button>
             </div>
         </div>
@@ -48,7 +51,7 @@
         <div class="v-seperator"></div>
         <div class="v-seperator"></div>
         <div class="v-seperator" id="end-s"></div>
-        <div class="rotator">
+        <div class="container-img">
             <div class="about-img"></div>
         </div>
     </div>
@@ -101,8 +104,64 @@
             </div>
         </div>
     </div>
-    
+    <footer>
+        <div class="contact-group">
+            <div class="contact-group-card">
+                <div class="contact-group-card-icon">
+                    <ion-icon name="call"></ion-icon>
+                </div>
+                <div class="contact-group-card-text">
+                    <h2>Contact</h2>
+                    <p>+97126218672</p>
+                </div>
+            </div>
+            <div class="contact-group-card">
+                <div class="contact-group-card-icon">
+                    <ion-icon name="mail"></ion-icon>
+                </div>
+                <div class="contact-group-card-text">
+                    <h2>Email</h2>
+                    <p>imoncx@gmail.com</p>
+                </div> 
+            </div>
+            <div class="contact-group-card">
+                <div class="contact-group-card-icon">
+                    <ion-icon name="location"></ion-icon>
+                </div>
+                <div class="contact-group-card-text">
+                    <h2>Location</h2>
+                    <p><a href="https://www.google.com/maps/place/Jotun+Multicolor+-+Asia+Exhibition+Multiple+Colors/@24.486741,54.3723894,15z/data=!4m5!3m4!1s0x0:0x1783c4b3b22b4a93!8m2!3d24.486741!4d54.3723894?hl=en">@gmail.com</a></p>    
+                </div>
+            </div>
+        </div>
+        <div class="v-seperator"></div>
+        <div id="link-group">
+            <h2>Pages</h2>
+            <ul id="link-list">
+                <li><a href="">Home</a></li>
+                <li><a href="">Decorate Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Contacts</a></li>
+            </ul>
+        </div>
+    </footer>
 </body>
+<script>
+    const navSelection = () => {
+        const nav = document.querySelector("#mobileNavButton");
+        const mainNav = document.querySelector("#mainNav");
+        if(nav.classList.contains("navSelected"))
+        {
+            nav.classList.remove("navSelected");
+            nav.classList.add("navUnselected");
+            mainNav.style.display = "none";
+        }else{
+            nav.classList.add("navSelected");
+            nav.classList.remove("navUnselected");
+            mainNav.style.display = "flex";
+        }
+    }
+</script>
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 <script src="js/indes.js"></script>
 

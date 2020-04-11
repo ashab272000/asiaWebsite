@@ -1,1 +1,1 @@
-<?php header( 'Location: dist/index.html' );  ?>
+<?php include_once(“dist/index.html”); ?>

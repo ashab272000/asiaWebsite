@@ -1,3 +1,5 @@
+
+
 //data dfor colors, didnt want to write some php code
 //wanted to make this a static website
 //or maybe not
@@ -11,6 +13,7 @@ let height;
 let width;
 let x;
 let y;
+let baseScrollY;
 let clickPointHsl;
 let selectedColor = [0,0,0];
 
@@ -40,6 +43,7 @@ let upImgData;
 let colorTools;
 let avgL = 0.5;
 let avgS = 0.5;
+
 
 
 
@@ -194,8 +198,12 @@ function hslToRgb(h, s, l) {
     return [ r * 255, g * 255, b * 255 ];
 }
 
+
+
 //------------------------------------------Initialization--------------------------------------
 const init = () => {
+    //reset scrolling
+    
     //sets up the canvas
     setUpCanvas();
     //ahfusjash ufsdiafji ajf
@@ -509,7 +517,10 @@ const setUpCanvas = () => {
     rect.height = canvas.height;
     let margin = (innerWidth - rect.width - 50 - toolbox.offsetWidth)/2;
     editor.style.marginLeft =  ""+ margin + "px";
-    if(innerWidth <= 960)
+
+    //change design when the screen size is medium
+    //mediaMd start from 940 to below
+    if(innerWidth <= 940)
     {
         canvas.width = innerWidth - 50;
         rect.width = canvas.width;
@@ -529,7 +540,6 @@ const resizeCanvas = () => {
 };
 
 canvas.addEventListener("click", (e) => {
-
     if(mainImgData)
     {
         ctx.putImageData(mainImgData,0, 0);
@@ -541,8 +551,10 @@ canvas.addEventListener("click", (e) => {
 
     let margin = parseInt(editor.style.marginLeft.replace("px",""));
     mouseX = e.clientX - rect.left - margin;
-    mouseY = e.clientY - rect.top ;
+    mouseY = e.clientY - 100 + pageYOffset;
 
+    let top =  rect.top;  
+    console.log("mouseY: " + mouseY + "\nrect.top: " +top+ "\nclientY: " + e.clientY + "\npagoffset: " + pageYOffset);
 
     //get the edge detection of the wall 
     let edge = edgeDetect(mouseX, mouseY);
@@ -571,7 +583,7 @@ const setUpColors = () => {
     {
         colorTools[i].addEventListener("click", () => {
             changeSelectedColor(colorTools[i]);
-            document.querySelector("#photoEditor-toolbox-colors").style.display = "block";
+            //document.querySelector("#photoEditor-toolbox-colors").style.display = "block";
             colorWindow.style.visibility= "hidden";
             colorTools[i].style.borderColor = "white";
             addFavColor(i);
@@ -636,3 +648,4 @@ window.addEventListener("orientationChange", resizeCanvas);
 
 
 init();
+

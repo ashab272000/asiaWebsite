@@ -358,7 +358,7 @@ const changeImage = (mainHsl,data,changeData, edgeData) =>{
             //pretty good
             //lightness = selectedHsl[2] + (hsl[2] - selectedHsl[2] + (-(highestL+ lowestL) / 2) + selectedHsl[2]);
             lightness = (selectedHsl[2] ) + ((hsl[2] )+ (-(avgL)));
-            lightness *= (selectedHsl[2] * 0.8);
+            lightness *= (selectedHsl[2]);
             saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6))
             //saturation = (selectedHsl[1] - 0.7) + ((hsl[1] * 100)/((1 + (selectedHsl[1] - 0.7)) * 100));
             //saturation = selectedHsl[1] - (hsl[1] * hsl[2]) + (selectedHsl[1] * lightness);

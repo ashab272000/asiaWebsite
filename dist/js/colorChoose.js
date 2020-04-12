@@ -58,6 +58,8 @@ const saveImageDataForUndo = (imgData) =>
         undoImageDatas.shift();
     }
     undoImageDatas.push(imgData);
+
+    console.log(undoImageDatas);
 }
 const saveImageDataForRedo = (imgData) =>
 {
@@ -73,11 +75,13 @@ const clearRedo =() => {
 }
 
 const undo = () => {
-    if(undoImageDatas > 0)
+    if(undoImageDatas.length > 0)
     {   
+        let currentImgData = ctx.getImageData(0,0,canvas.width, canvas.height);
+        saveImageDataForRedo(currentImgData);
         let imgData = undoImageDatas.pop();
-        saveImageDataForRedo(imgData);
         return imgData;
+        
     }
     else{
         return null;
@@ -85,11 +89,13 @@ const undo = () => {
 }
 
 const redo = () => {
-    if(redoImageDatas > 0)
+    if(redoImageDatas.length > 0)
     {   
         let imgData = redoImageDatas.pop();
-        saveImageDataForUndo(imgData);
+        //saveImageDataForUndo(imgData);
         return imgData;
+    }else{
+        return null;
     }
 }
 
@@ -589,7 +595,7 @@ const resizeCanvas = () => {
 
 canvas.addEventListener("click", (e) => {
     //save the image data for undo purposes
-    saveImageDataForUndo(ctx.getImageData());
+    saveImageDataForUndo(ctx.getImageData(0, 0,canvas.height, canvas.width));
     clearRedo();
     if(mainImgData)
     {
@@ -693,8 +699,8 @@ cancelColorWindow.addEventListener("click", () =>{
 
 undoButton.addEventListener("click", () => {
     let imgData = undo();
-
-    if(imgData)
+    console.log("undoButton clicked");
+    if(imgData != null)
     {
         ctx.putImageData(imgData, 0, 0);
     }

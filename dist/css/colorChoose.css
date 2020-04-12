@@ -200,7 +200,7 @@ footer {
     #photoEditor-toolbox-colors {
       margin-top: 0px;
       display: block;
-      height: 300px;
+      height: 200px;
       border-bottom: 1px solid #6495ED;
       overflow-y: auto; }
       #photoEditor-toolbox-colors .fav {
@@ -232,7 +232,7 @@ footer {
       justify-content: center;
       align-content: center;
       align-items: center;
-      height: 200px; }
+      height: 300px; }
       #photoEditor-toolbox-upload button {
         margin: 10px;
         background: none;
@@ -331,12 +331,15 @@ footer {
         display: flex;
         flex-direction: row;
         justify-content: center;
-        height: 100px; }
+        height: auto; }
         #photoEditor-toolbox-upload button {
           width: 250px;
-          margin: 0 10px 10px 10px; } }
+          height: 70px;
+          margin: 10px; } }
 
 @media screen and (max-width: 600px) {
   #photoEditor-toolbox-upload {
     flex-direction: column;
-    height: 150px; } }
+    height: auto; }
+    #photoEditor-toolbox-upload button {
+      height: auto; } }

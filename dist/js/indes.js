@@ -5,6 +5,6 @@ const elements= {
 }
 
 elements.colorChooseButton.addEventListener("click", ()=> {
-    window.location.pathname = '/dist/html/colorChoose.html';  
+    window.location.pathname = '/html/colorChoose.html';  
 })
 

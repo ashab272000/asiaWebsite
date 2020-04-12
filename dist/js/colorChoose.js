@@ -509,7 +509,10 @@ const setUpCanvas = () => {
     rect.height = canvas.height;
     let margin = (innerWidth - rect.width - 50 - toolbox.offsetWidth)/2;
     editor.style.marginLeft =  ""+ margin + "px";
-    if(innerWidth <= 960)
+
+    //change design when the screen size is medium
+    //mediaMd start from 940 to below
+    if(innerWidth <= 940)
     {
         canvas.width = innerWidth - 50;
         rect.width = canvas.width;
@@ -571,7 +574,7 @@ const setUpColors = () => {
     {
         colorTools[i].addEventListener("click", () => {
             changeSelectedColor(colorTools[i]);
-            document.querySelector("#photoEditor-toolbox-colors").style.display = "block";
+            //document.querySelector("#photoEditor-toolbox-colors").style.display = "block";
             colorWindow.style.visibility= "hidden";
             colorTools[i].style.borderColor = "white";
             addFavColor(i);

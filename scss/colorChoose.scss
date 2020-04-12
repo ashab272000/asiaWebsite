@@ -8,14 +8,14 @@
 
 #photoEditor{
 
-    width: 100%;
-    height: calc(100vh - 100px);
-    padding: 100px 0px 0px 0px;
+    width: 100vw;
+    //height: calc(100vh - 100px);
+    padding: 100px 0px 100px 0px;
     background-color: #222;
     display: block;
 
     #editor-container{
-        width: fit-content;
+        width: 100%;
     }
     &-canvas{
         float: left;
@@ -27,7 +27,7 @@
         float: left;
         margin: 0px;
         width: 300px;
-        height: 500px;
+        //height: 500px;
         border: 2px solid $primaryColor;
         justify-content: center;
         &-colors{
@@ -35,6 +35,7 @@
             display: block;
             height: 300px;
             border-bottom: 1px solid $primaryColor;
+            overflow-y: auto;
 
             .fav{
                 display: flex;
@@ -71,7 +72,9 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-content: center;
             align-items: center;
+            height: 200px;
             button{
                 margin: 10px;
                 background: none;
@@ -108,8 +111,9 @@
     visibility: hidden;
     width: 100vw;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     top: 0;
+    z-index: 20000;
     //display: flex;
     //justify-content: center;
 
@@ -120,7 +124,7 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        z-index: 7;
+        overflow: auto;
         h2{
             text-align: center;
             font-size: 32px;
@@ -171,4 +175,59 @@
         }
     }
 
+}
+
+@include mediaMd{
+
+        
+    #photoEditor{
+        height:  auto;
+        padding-bottom: 50px;
+
+        &-toolbox{
+            width: calc(100% - 54px);
+            margin: 50px 0 50px 0;
+
+            //height: 300px;
+
+            &-colors{
+                height: 150px;
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+
+
+                .fav{
+                    //float: left;
+                    flex-direction: column;
+                    min-width: 130px;
+                    width: 130px;
+                    height: 100%;
+                    padding: 0px 0;
+
+                }
+            }
+
+            &-upload{
+                
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                height: 100px;
+
+                button{
+                    width: 250px;
+                    margin: 0 10px 10px 10px;
+                }
+            }
+        }
+    }
+    
+}
+
+@include mediaSm{
+    #photoEditor-toolbox-upload{
+        flex-direction: column;
+        height: 150px;
+    }
 }

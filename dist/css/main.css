@@ -154,16 +154,28 @@ footer {
         text-align: center;
         color: white;
         margin: 0px; }
-  footer .contact-group {
-    margin-left: -25px; }
-    footer .contact-group-card h2 {
-      font-size: 18px; }
-    footer .contact-group-card p {
-      font-size: 11px; }
-  footer .v-seperator {
-    display: none; }
-  footer #link-group {
-    display: none; } }
+  footer {
+    height: auto;
+    padding-top: 20px; }
+    footer .contact-group {
+      margin-left: -25px; }
+      footer .contact-group-card {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0 40px 0; }
+        footer .contact-group-card-text {
+          margin: 0; }
+          footer .contact-group-card-text h2 {
+            text-align: center;
+            font-size: 24px; }
+          footer .contact-group-card-text p {
+            text-align: center;
+            font-size: 16px; }
+    footer .v-seperator {
+      display: none; }
+    footer #link-group {
+      display: none; } }
 
 #sildeshow {
   position: relative;

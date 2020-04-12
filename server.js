@@ -1,9 +1,14 @@
-var http = require('http');
-var fs = require('fs');
-http.createServer(function (req, res) {
-  fs.readFile('./dist/index.html', function(err, data) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(data);
-    res.end();
+const express = require('express');
+const app = express();
+const server = require('http').Server(app);
+
+server.listen(process.env.PORT || 80);
+// WARNING: app.listen(80) will NOT work here!
+
+
+//Sends the 'dist' folder to server
+app.use('/', express.static(__dirname + '/dist'));
+
+app.get('/', (req, res)=>  {
+    res.sendFile(__dirname + '/dist/index.html');
   });
-}).listen(8080);

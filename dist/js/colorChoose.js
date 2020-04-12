@@ -11,6 +11,7 @@ const colorsInfo = ["7236, Jazz White", "1624, Skylight", "0567, Ivory", "1024, 
 let colorChosen = [null, null, null, null, null, null];
 let height;
 let width;
+let canvasTop;
 let x;
 let y;
 let baseScrollY;
@@ -510,6 +511,7 @@ const egdeColorChange = (imgData, pixel) =>
 }
 
 const setUpCanvas = () => {
+    canvasTop = canvas.getBoundingClientRect().top + pageYOffset;
     innerWidthRatio = baseInnerWidth/innerWidth;
     canvas.width = baseCanvasWidth/innerWidthRatio;
     canvas.height = baseCanvasHeight;
@@ -551,7 +553,7 @@ canvas.addEventListener("click", (e) => {
 
     let margin = parseInt(editor.style.marginLeft.replace("px",""));
     mouseX = e.clientX - rect.left - margin;
-    mouseY = e.clientY - 100 + pageYOffset;
+    mouseY = e.clientY - canvasTop + pageYOffset;
 
     let top =  rect.top;  
     console.log("mouseY: " + mouseY + "\nrect.top: " +top+ "\nclientY: " + e.clientY + "\npagoffset: " + pageYOffset);

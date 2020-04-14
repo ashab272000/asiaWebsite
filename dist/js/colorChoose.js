@@ -550,7 +550,7 @@ const changePixelEdge = (currentPixel, compare , imgData,value, pop) =>{
         let rgbDiff = Math.abs(((currentRgbValue[0] + currentRgbValue[1] + currentRgbValue[2])/3) - ((compareRgbValue[0] + compareRgbValue[1] + compareRgbValue[2])/3));
 
         
-        if( compareValue < 0.03 && compareLightness > -0.06 && compareLightness < 0.06 && rgbDiff < 6)
+        if( compareValue < 0.03 && compareLightness > -0.06 && compareLightness < 0.06 && rgbDiff < 3)
         {
             if(!pop)
             {

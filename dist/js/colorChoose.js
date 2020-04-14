@@ -657,10 +657,6 @@ canvas.addEventListener("click", (e) => {
     canvasClicked(e);
 });
 
-canvas.addEventListener("touchstart", (e) => {
-    canvasClicked(e);
-});
-
 
 const setUpColors = () => {
 

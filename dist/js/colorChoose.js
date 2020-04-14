@@ -326,10 +326,7 @@ const changeImage = (mainHsl,data,changeData, edgeData) =>{
 
     //convert the selected color from rgb to hsl
     let selectedHsl = rgbToHsl(...selectedColor);
-    
-    //highest lightness formula
 
-    
     //go through the all the pixels in the image
     for (let i = 0; i < edgeImg.data.length; i+=4) {
         
@@ -358,17 +355,12 @@ const changeImage = (mainHsl,data,changeData, edgeData) =>{
             //pretty good
             //lightness = selectedHsl[2] + (hsl[2] - selectedHsl[2] + (-(highestL+ lowestL) / 2) + selectedHsl[2]);
             lightness = (selectedHsl[2]) + ((hsl[2] )+ (-(avgL)));
-            lightness *= (selectedHsl[2]);
-            //lightness += 0.1;
+            lightness *= (selectedHsl[2] * 0.85);
+            lightness += 0.2;
             //saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6));
-            let hS = 130;
-            let lS = 42;
-            let aS = (hS + lS)/2;
-            let diffLs = aS - lS;
-            let colorS = selectedHsl[2] * 100;
-            let formS = ((aS - colorS)/diffLs) * 0.1;
+
             //saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6)) + ((((0.92+0.42)/2) - selectedHsl[2]) * (10/25));
-            saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6)) + formS;
+            saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6));
             //saturation = selectedHsl[1];
             //saturation = selectedHsl[1] - (selectedHsl[1] * avgL * selectedHsl[2]);
 
@@ -550,7 +542,7 @@ const changePixelEdge = (currentPixel, compare , imgData,value, pop) =>{
         let rgbDiff = Math.abs(((currentRgbValue[0] + currentRgbValue[1] + currentRgbValue[2])/3) - ((compareRgbValue[0] + compareRgbValue[1] + compareRgbValue[2])/3));
 
         
-        if( compareValue < 0.03 && compareLightness > -0.06 && compareLightness < 0.06 && rgbDiff < 3)
+        if( compareValue < 0.03 && compareLightness > -0.06 && compareLightness < 0.06 && rgbDiff < 6)
         {
             if(!pop)
             {

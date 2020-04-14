@@ -269,7 +269,7 @@ const init = () => {
 }
 
 //load a specific image
-const loadImage = (src = "../img/img4.jpg") => {
+const loadImage = (src = "../img/pagol2.jpg") => {
 
     //setting the avgerage value for click and all
     avgL = 0.5;
@@ -357,9 +357,23 @@ const changeImage = (mainHsl,data,changeData, edgeData) =>{
             
             //pretty good
             //lightness = selectedHsl[2] + (hsl[2] - selectedHsl[2] + (-(highestL+ lowestL) / 2) + selectedHsl[2]);
-            lightness = (selectedHsl[2] ) + ((hsl[2] )+ (-(avgL)));
+            lightness = (selectedHsl[2]) + ((hsl[2] )+ (-(avgL)));
             lightness *= (selectedHsl[2]);
-            saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6))
+            //lightness += 0.1;
+            //saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6));
+            let hS = 130;
+            let lS = 42;
+            let aS = (hS + lS)/2;
+            let diffLs = aS - lS;
+            let colorS = selectedHsl[2] * 100;
+            let formS = ((aS - colorS)/diffLs) * 0.1;
+            //saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6)) + ((((0.92+0.42)/2) - selectedHsl[2]) * (10/25));
+            saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6)) + formS;
+            //saturation = selectedHsl[1];
+            //saturation = selectedHsl[1] - (selectedHsl[1] * avgL * selectedHsl[2]);
+
+
+
             //saturation = (selectedHsl[1] - 0.7) + ((hsl[1] * 100)/((1 + (selectedHsl[1] - 0.7)) * 100));
             //saturation = selectedHsl[1] - (hsl[1] * hsl[2]) + (selectedHsl[1] * lightness);
             //saturation = selectedHsl[1] - (hsl[1] - selectedHsl[1] + (-(highestS+ lowestS) / 2) + selectedHsl[1]);
@@ -375,6 +389,7 @@ const changeImage = (mainHsl,data,changeData, edgeData) =>{
 
     //put the image data when done
     ctx.putImageData(changeData,0,0);
+    console.log("selectedHsl[1]: " + selectedHsl[1]+" selectedHsl[2]: " + selectedHsl[2]);
     console.log("highest saturation: " + (selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2] ) * 0.6))))
 }
 
@@ -509,7 +524,6 @@ const runSuccessChangePixelEdge = (imgData,nextPixel, currentPixel, lowestL, hig
 
 
 const changePixelEdge = (currentPixel, compare , imgData,value, pop) =>{
-    
     //get the hsl of the pixel
     let currentHsl = rgbToHsl(mainImgData.data[currentPixel * 4], mainImgData.data[currentPixel * 4 + 1], mainImgData.data[currentPixel * 4 + 2]);
     let compareValue;
@@ -519,7 +533,9 @@ const changePixelEdge = (currentPixel, compare , imgData,value, pop) =>{
 
     //compare the pixel above
     comparePixel = currentPixel + (value);
-    if(imgData.data[comparePixel * 4] != 255 && imgData.data[comparePixel * 4 + 1] != 255  && imgData.data[comparePixel * 4 + 2] != 255 )
+
+
+    if(!(imgData.data[comparePixel * 4] == 255 && imgData.data[comparePixel * 4 + 1] == 255  && imgData.data[comparePixel * 4 + 2] == 255 && imgData.data[comparePixel * 4 + 3] == 69) )
     {
         comparePixelHsl = rgbToHsl(mainImgData.data[comparePixel * 4], mainImgData.data[comparePixel * 4 + 1], mainImgData.data[comparePixel * 4 + 2]);
         compareValue = Math.abs(currentHsl[compare] - comparePixelHsl[compare]);
@@ -533,7 +549,8 @@ const changePixelEdge = (currentPixel, compare , imgData,value, pop) =>{
         let compareRgbValue = [mainImgData.data[comparePixel * 4], mainImgData.data[comparePixel * 4 + 1], mainImgData.data[comparePixel * 4 + 2]];
         let rgbDiff = Math.abs(((currentRgbValue[0] + currentRgbValue[1] + currentRgbValue[2])/3) - ((compareRgbValue[0] + compareRgbValue[1] + compareRgbValue[2])/3));
 
-        if(compareValue < 0.03  && compareLightness > -0.06 && compareLightness < 0.06 && rgbDiff < 6)
+        
+        if( compareValue < 0.03 && compareLightness > -0.06 && compareLightness < 0.06 && rgbDiff < 6)
         {
             if(!pop)
             {
@@ -560,6 +577,7 @@ const egdeColorChange = (imgData, pixel) =>
     imgData.data[pixel * 4] = 255;
     imgData.data[pixel * 4 + 1] = 255;
     imgData.data[pixel * 4 + 2] = 255;
+    imgData.data[pixel * 4 + 3] = 69; 
 }
 
 const setUpCanvas = () => {
@@ -615,6 +633,7 @@ const canvasClicked = (e) => {
 
     //get the edge detection of the wall 
     let edge = edgeDetect(mouseX, mouseY);
+    //ctx.putImageData(edge[0], 0, 0);
     //get the image data of where the mouse clicked
     let data = ctx.getImageData(mouseX,mouseY,2,2);
     //The following is done so that, existing paint are not overwritten if the new paint is in another place
@@ -626,6 +645,8 @@ const canvasClicked = (e) => {
 
     //convert the rgb to hsl
     clickPointHsl = rgbToHsl(data.data[0],data.data[1], data.data[2]);
+
+    console.log("clickPointHsl: " + clickPointHsl);
 
     //get the image data again, and update it to upImageData
     upImgData = ctx.getImageData(0,0,rect.width,rect.height);

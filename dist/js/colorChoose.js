@@ -593,7 +593,7 @@ const resizeCanvas = () => {
     setUpCanvas();
 };
 
-canvas.addEventListener("click", (e) => {
+const canvasClicked = () => {
     //save the image data for undo purposes
     saveImageDataForUndo(ctx.getImageData(0, 0,canvas.height, canvas.width));
     clearRedo();
@@ -630,7 +630,16 @@ canvas.addEventListener("click", (e) => {
     //get the image data again, and update it to upImageData
     upImgData = ctx.getImageData(0,0,rect.width,rect.height);
     changeImage(clickPointHsl, mainImgData, upImgData, edge);
+}
+
+canvas.addEventListener("click", (e) => {
+    canvasClicked();
 });
+
+canvas.addEventListener("touchstart", (e) => {
+    canvasClicked();
+});
+
 
 const setUpColors = () => {
 
@@ -716,7 +725,9 @@ redoButton.addEventListener("click", () => {
 });
 
 //this resizes the canvas when the window gets resized.
-window.addEventListener("resize", resizeCanvas);
+//this one is dev process
+//window.addEventListener("resize", resizeCanvas);
+
 window.addEventListener("orientationChange", resizeCanvas);
 
 

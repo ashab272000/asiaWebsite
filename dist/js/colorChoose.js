@@ -747,7 +747,7 @@ redoButton.addEventListener("click", () => {
 
 //this resizes the canvas when the window gets resized.
 //this one is dev process
-window.addEventListener("resize", resizeCanvas);
+//window.addEventListener("resize", resizeCanvas);
 
 window.addEventListener("orientationChange", resizeCanvas);
 

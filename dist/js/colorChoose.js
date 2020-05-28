@@ -59,7 +59,6 @@ const saveImageDataForUndo = (imgData) =>
     }
     undoImageDatas.push(imgData);
 
-    console.log(undoImageDatas);
 }
 const saveImageDataForRedo = (imgData) =>
 {
@@ -326,6 +325,9 @@ const changeImage = (mainHsl,data,changeData, edgeData) =>{
 
     //convert the selected color from rgb to hsl
     let selectedHsl = rgbToHsl(...selectedColor);
+    let avgLightness = 0;
+    let avgSaturation = 0;
+    let avgCounter = 0;
 
     //go through the all the pixels in the image
     for (let i = 0; i < edgeImg.data.length; i+=4) {
@@ -336,6 +338,7 @@ const changeImage = (mainHsl,data,changeData, edgeData) =>{
         if(edgeImg.data[i] == 255 && edgeImg.data[i+1] == 255 && edgeImg.data[i+2] ==  255){
 
             //lightness formula
+            avgCounter++;
             
    
             let lightness;
@@ -354,13 +357,15 @@ const changeImage = (mainHsl,data,changeData, edgeData) =>{
             
             //pretty good
             //lightness = selectedHsl[2] + (hsl[2] - selectedHsl[2] + (-(highestL+ lowestL) / 2) + selectedHsl[2]);
-            lightness = (selectedHsl[2]) + ((hsl[2] )+ (-(avgL)));
+            lightness = (selectedHsl[2]) + ((hsl[2])+ (-(avgL)));
             lightness *= (selectedHsl[2] * 0.85);
-            lightness += 0.2;
+            lightness = (lightness + selectedHsl[2])/2;
+            avgLightness += lightness;
             //saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6));
 
             //saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6)) + ((((0.92+0.42)/2) - selectedHsl[2]) * (10/25));
             saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6));
+            saturation = (selectedHsl[1] + saturation)/2;
             //saturation = selectedHsl[1];
             //saturation = selectedHsl[1] - (selectedHsl[1] * avgL * selectedHsl[2]);
 
@@ -383,6 +388,7 @@ const changeImage = (mainHsl,data,changeData, edgeData) =>{
     ctx.putImageData(changeData,0,0);
     console.log("selectedHsl[1]: " + selectedHsl[1]+" selectedHsl[2]: " + selectedHsl[2]);
     console.log("highest saturation: " + (selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2] ) * 0.6))))
+    console.log(`Lightness value:  ${avgLightness/avgCounter}`);
 }
 
 //detect the edge
@@ -497,6 +503,7 @@ const pixelEdgeDetect = (compare, pixel, imgData) => {
 const runSuccessChangePixelEdge = (imgData,nextPixel, currentPixel, lowestL, highestL,pixels) =>
 {
 
+
     egdeColorChange(imgData, nextPixel);
     pixels.push(currentPixel);
 
@@ -542,7 +549,7 @@ const changePixelEdge = (currentPixel, compare , imgData,value, pop) =>{
         let rgbDiff = Math.abs(((currentRgbValue[0] + currentRgbValue[1] + currentRgbValue[2])/3) - ((compareRgbValue[0] + compareRgbValue[1] + compareRgbValue[2])/3));
 
         
-        if( compareValue < 0.03 && compareLightness > -0.06 && compareLightness < 0.06 && rgbDiff < 6)
+        if( compareValue < 0.03 && compareLightness > -0.06 && compareLightness < 0.06 && rgbDiff < 5)
         {
             if(!pop)
             {
@@ -605,7 +612,7 @@ const resizeCanvas = () => {
 
 const canvasClicked = (e) => {
     //save the image data for undo purposes
-    saveImageDataForUndo(ctx.getImageData(0, 0,canvas.height, canvas.width));
+    saveImageDataForUndo(ctx.getImageData(0, 0,rect.height, rect.width));
     clearRedo();
     if(mainImgData)
     {

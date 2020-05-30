@@ -40,59 +40,60 @@ nav {
       margin: 0px 20px;
       color: #6495ED;
       font-weight: 500; }
+      nav ul li a {
+        color: #6495ED; }
 
 footer {
   width: 100%;
   height: 400px;
-  background-color: #2d3436;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding: 50px 20px 0 20px; }
-  footer .contact-group {
+  background-color: #383838; }
+  footer h2 {
+    color: white;
+    margin: 0; }
+  footer p, footer a, footer ion-icon {
+    color: #999;
+    margin: 0; }
+  footer .grid-horizontal {
     display: flex;
-    flex-direction: column;
-    width: 220px; }
-    footer .contact-group-card {
-      margin: 0 0 20px 0;
-      display: flex; }
-      footer .contact-group-card-text {
-        margin: 0 0 0 20px; }
-        footer .contact-group-card-text h2 {
-          font-weight: 400;
-          font-size: 24px;
-          margin-bottom: 5px; }
-        footer .contact-group-card-text p {
-          color: #6495ED; }
-      footer .contact-group-card-icon {
-        width: 60px;
-        height: 60px;
-        background-color: white;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 20px; }
-        footer .contact-group-card-icon ion-icon {
-          font-size: 32px;
-          text-align: center;
-          color: #6495ED; }
-  footer .v-seperator {
-    width: 1px;
-    height: 300px;
-    display: block;
-    margin: -20px 25px 0 25px;
-    background: #6495ED; }
-  footer #link-group {
-    width: 220px;
-    margin: 0 0 0 25px; }
-    footer #link-group h2 {
-      font-size: 24px;
-      font-weight: 400; }
-    footer #link-group ul li {
-      margin: 0 0 30px 0; }
-      footer #link-group ul li a {
-        color: white; }
+    justify-content: space-evenly;
+    padding: 32px; }
+    footer .grid-horizontal-item {
+      width: 300px; }
+  footer .grid-vertical {
+    display: grid;
+    grid-template-rows: auto auto auto auto auto;
+    gap: 0px; }
+    footer .grid-vertical-item {
+      padding: 8px 8px; }
+  footer #footer-content-description .icon-info {
+    display: flex; }
+    footer #footer-content-description .icon-info ion-icon {
+      display: inline-block;
+      margin: 0;
+      padding: 4px 8px 0 0; }
+  footer #footer-content-links {
+    grid-template-rows: repeat(5, 0.18fr); }
+  footer #footer-content-form #input-header {
+    padding: 0px 8px;
+    margin-bottom: 8px; }
+  footer #footer-content-form .input {
+    display: flex;
+    justify-content: center;
+    padding: 8px; }
+    footer #footer-content-form .input-textarea {
+      padding: 8px; }
+  footer #footer-content-form #input-button {
+    padding: 8px 24px;
+    font-weight: 700;
+    margin: 8px;
+    color: #999;
+    text-decoration: none;
+    background-color: #2d3436;
+    border: 2px solid #222; }
+
+@media screen and (max-width: 940px) {
+  .grid-horizontal {
+    grid-template-rows: 1fr 1fr 1fr; } }
 
 @media screen and (max-width: 600px) {
   nav {
@@ -154,6 +155,8 @@ footer {
         text-align: center;
         color: white;
         margin: 0px; }
+        nav ul li a {
+          color: white; }
   footer {
     height: auto;
     padding-top: 20px; }
@@ -224,6 +227,14 @@ footer {
   height: 350px;
   margin-right: 10px; }
 
+@media screen and (max-width: 940px) {
+  .v-seperator {
+    width: 60%;
+    background-color: #6495ED;
+    height: 1px;
+    margin: 0px;
+    margin-top: 10px; } }
+
 .about {
   display: flex;
   justify-content: center;
@@ -247,6 +258,18 @@ footer {
   .about .container-img {
     width: auto;
     height: auto; }
+
+@media screen and (max-width: 940px) {
+  .about {
+    flex-direction: column-reverse; }
+    .about #end-s {
+      margin: 0px;
+      margin-top: 50px; }
+    .about-des {
+      height: auto;
+      width: 60%;
+      text-align: center;
+      margin: 40px 0px 75px 0px; } }
 
 .wwd {
   margin: 100px 0;
@@ -291,22 +314,6 @@ footer {
           color: #2d3436; }
 
 @media screen and (max-width: 940px) {
-  .v-seperator {
-    width: 60%;
-    background-color: #6495ED;
-    height: 1px;
-    margin: 0px;
-    margin-top: 10px; }
-  .about {
-    flex-direction: column-reverse; }
-    .about #end-s {
-      margin: 0px;
-      margin-top: 50px; }
-    .about-des {
-      height: auto;
-      width: 60%;
-      text-align: center;
-      margin: 40px 0px 75px 0px; }
   .wwd-group {
     flex-direction: column;
     align-items: center; } }

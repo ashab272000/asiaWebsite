@@ -8,3 +8,4 @@ const imgLayers = new Layers();
 imgLayers.addImgLayer(new ImageLayer('../img/img1.jpg', canvasController));
 
 canvasController.drawImage(imgLayers.getLayer().imgLayer);
+

@@ -21,6 +21,10 @@ export class CanvasView {
         this.setUpCanvas();
     }
 
+    getEditor(){
+        return this._editor;
+    }
+
     getCanvasValues(){
         return {
             canvas:  this._canvas,

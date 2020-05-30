@@ -1,5 +1,6 @@
 import {CanvasView} from "./canvas_view";
-
+import {ColorConverter} from "./color_converter";
+import { EdgeDetect } from "../EdgeDetection/edge_detec";
 
 export class CanvasController {
     
@@ -10,7 +11,8 @@ export class CanvasController {
         this._canvas = canvasValues.canvas;
         this._ctx = canvasValues.ctx;
         this._rect = canvasValues.rect;
-
+        this._colorConverter = new ColorConverter();
+        this._edgeDetector = new EdgeDetect();
         this._setupListeners();
     }
 
@@ -134,53 +136,25 @@ export class CanvasController {
         //      This wil take the corresponding edge detection layer
         //      and paint the where the mask is drawn white
 
-        //save the image data for undo purposes
+        //get the mouse position
+        let mousePosition = this._getMousePosition(e);
 
-        //get the edge detection layer mask
-
-        //
-
-        // saveImageDataForUndo(ctx.getImageData(0, 0,rect.height, rect.width));
-        // clearRedo();
-        // if(mainImgData)
-        // {
-        //     ctx.putImageData(mainImgData,0, 0);
-        // }
-        // //get mouse position
-
-        // let mouseX;
-        // let mouseY;
-
-        // let margin = parseInt(editor.style.marginLeft.replace("px",""));
-        // mouseX = e.clientX - rect.left - margin;
-        // mouseY = e.clientY - canvasTop + pageYOffset;
-
-        // let top =  rect.top;  
-        // console.log("mouseY: " + mouseY + "\nrect.top: " +top+ "\nclientY: " + e.clientY + "\npagoffset: " + pageYOffset);
-
-        // //get the edge detection of the wall 
-        // let edge = edgeDetect(mouseX, mouseY);
-        // //ctx.putImageData(edge[0], 0, 0);
-        // //get the image data of where the mouse clicked
-        // let data = ctx.getImageData(mouseX,mouseY,2,2);
-        // //The following is done so that, existing paint are not overwritten if the new paint is in another place
-        // //if there is an image data to be painted on, use that
-        // if(upImgData)
-        // {
-        //     ctx.putImageData(upImgData, 0, 0);
-        // }
-
-        // //convert the rgb to hsl
-        // clickPointHsl = rgbToHsl(data.data[0],data.data[1], data.data[2]);
-
-        // console.log("clickPointHsl: " + clickPointHsl);
-
-        // //get the image data again, and update it to upImageData
-        // upImgData = ctx.getImageData(0,0,rect.width,rect.height);
-        // changeImage(clickPointHsl, mainImgData, upImgData, edge);
+        //detectEdge(mousePosition);
 
 
     };
+
+    _getMousePosition(e){
+        const editor = this._canvasView.getEditor();
+        let margin = parseInt(editor.style.marginLeft.replace("px",""));
+        let mouseX = e.clientX - this._rect.left - margin;
+        let mouseY = e.clientY - canvasTop + pageYOffset;
+
+        return {
+            x : mouseX,
+            y : mouseY
+        }
+    }
 
     loadImageData(src, callback){
         const img = new Image();

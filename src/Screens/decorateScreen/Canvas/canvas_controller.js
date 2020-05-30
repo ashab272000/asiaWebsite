@@ -13,22 +13,29 @@ export class CanvasController {
 
         this._setupListeners();
     }
+
+    getCanvas(){
+        return this._canvas;
+    }
     
     //load a specific image
     //loadImage(src = "../img/pagol2.jpg"){
-    drawImage(src = "../img/pagol2.jpg"){
-        //clear the canvase so that an image could be drawn
-        this._canvasView.clearCanvas();
+    drawImage(imgLayer){
 
-        //create a new image object with the src specified
-        let img;
-        let imgTransform;
-        this.loadImageData(src, (result) => {
-            img = result.img;
-            imgTransform = result.transform;
-            console.log(result);
+        //setTimeout waits for 100ms
+        //It waits for the image to load
+        let timeout = setTimeout(() => {
+            //clear the canvase so that an image could be drawn
+            //console.log(imgLayer);
+            this._canvasView.clearCanvas();
+
+            //create a new image object with the src specified
+            let img = imgLayer.getImgData();
+            let imgTransform = imgLayer.getImgTransform();
+
             this._ctx.drawImage(img, imgTransform.x, imgTransform.y, imgTransform.width, imgTransform.height);
-        });
+
+        },300);
 
 
     }
@@ -133,44 +140,46 @@ export class CanvasController {
 
         //
 
-        saveImageDataForUndo(ctx.getImageData(0, 0,rect.height, rect.width));
-        clearRedo();
-        if(mainImgData)
-        {
-            ctx.putImageData(mainImgData,0, 0);
-        }
-        //get mouse position
+        // saveImageDataForUndo(ctx.getImageData(0, 0,rect.height, rect.width));
+        // clearRedo();
+        // if(mainImgData)
+        // {
+        //     ctx.putImageData(mainImgData,0, 0);
+        // }
+        // //get mouse position
 
-        let mouseX;
-        let mouseY;
+        // let mouseX;
+        // let mouseY;
 
-        let margin = parseInt(editor.style.marginLeft.replace("px",""));
-        mouseX = e.clientX - rect.left - margin;
-        mouseY = e.clientY - canvasTop + pageYOffset;
+        // let margin = parseInt(editor.style.marginLeft.replace("px",""));
+        // mouseX = e.clientX - rect.left - margin;
+        // mouseY = e.clientY - canvasTop + pageYOffset;
 
-        let top =  rect.top;  
-        console.log("mouseY: " + mouseY + "\nrect.top: " +top+ "\nclientY: " + e.clientY + "\npagoffset: " + pageYOffset);
+        // let top =  rect.top;  
+        // console.log("mouseY: " + mouseY + "\nrect.top: " +top+ "\nclientY: " + e.clientY + "\npagoffset: " + pageYOffset);
 
-        //get the edge detection of the wall 
-        let edge = edgeDetect(mouseX, mouseY);
-        //ctx.putImageData(edge[0], 0, 0);
-        //get the image data of where the mouse clicked
-        let data = ctx.getImageData(mouseX,mouseY,2,2);
-        //The following is done so that, existing paint are not overwritten if the new paint is in another place
-        //if there is an image data to be painted on, use that
-        if(upImgData)
-        {
-            ctx.putImageData(upImgData, 0, 0);
-        }
+        // //get the edge detection of the wall 
+        // let edge = edgeDetect(mouseX, mouseY);
+        // //ctx.putImageData(edge[0], 0, 0);
+        // //get the image data of where the mouse clicked
+        // let data = ctx.getImageData(mouseX,mouseY,2,2);
+        // //The following is done so that, existing paint are not overwritten if the new paint is in another place
+        // //if there is an image data to be painted on, use that
+        // if(upImgData)
+        // {
+        //     ctx.putImageData(upImgData, 0, 0);
+        // }
 
-        //convert the rgb to hsl
-        clickPointHsl = rgbToHsl(data.data[0],data.data[1], data.data[2]);
+        // //convert the rgb to hsl
+        // clickPointHsl = rgbToHsl(data.data[0],data.data[1], data.data[2]);
 
-        console.log("clickPointHsl: " + clickPointHsl);
+        // console.log("clickPointHsl: " + clickPointHsl);
 
-        //get the image data again, and update it to upImageData
-        upImgData = ctx.getImageData(0,0,rect.width,rect.height);
-        changeImage(clickPointHsl, mainImgData, upImgData, edge);
+        // //get the image data again, and update it to upImageData
+        // upImgData = ctx.getImageData(0,0,rect.width,rect.height);
+        // changeImage(clickPointHsl, mainImgData, upImgData, edge);
+
+
     };
 
     loadImageData(src, callback){

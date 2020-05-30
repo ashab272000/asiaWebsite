@@ -21,17 +21,17 @@ let clickPointHsl;
 let selectedColor = [0,0,0];
 
 //respornsive canvas
-const baseInnerWidth = 1366;
-const baseInnerHeight = 657;
-const baseCanvasWidth = 700;
-const baseCanvasHeight = 500; 
+const baseInnerWidth = 1366; //selected
+const baseInnerHeight = 657;    //selected
+const baseCanvasWidth = 700;//selected
+const baseCanvasHeight = 500; //selected
 let innerHeightRatio;
 let innerWidthRatio;
 
 //documnetselectors 
-const canvas =  document.querySelector("canvas");
-const rect = canvas.getBoundingClientRect();
-const ctx = canvas.getContext("2d");
+const canvas =  document.querySelector("canvas");//selected
+const rect = canvas.getBoundingClientRect();//selected
+const ctx = canvas.getContext("2d");//selected
 const uploadImgButton = document.querySelector("#uploadImage");
 const uploadInput = document.querySelector("#uploadInput");
 const chooseColorButton = document.querySelector("#chooseColorButton");
@@ -40,7 +40,7 @@ const redoButton = document.querySelector("#redoButton");
 const colorWindow = document.querySelector('#colors-window');
 const cancelColorWindow = document.querySelector('#cancel-window');
 const toolbox = document.querySelector("#photoEditor-toolbox-upload");
-const editor = document.getElementById("editor-container");
+const editor = document.getElementById("editor-container"); //selected
 //global variables
 let imgSrc = "../img/img4.jpg";
 let mainImgData;
@@ -267,6 +267,7 @@ const init = () => {
     setUpColors();
 }
 
+//selected
 //load a specific image
 const loadImage = (src = "../img/pagol2.jpg") => {
 

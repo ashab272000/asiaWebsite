@@ -1,5 +1,4 @@
 
-
 const elements= {
     colorChooseButton: document.querySelector("#colorChoose")
 }
@@ -7,4 +6,3 @@ const elements= {
 elements.colorChooseButton.addEventListener("click", ()=> {
     window.location.pathname = '/html/colorChoose.html';  
 })
-

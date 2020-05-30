@@ -40,6 +40,8 @@ nav {
       margin: 0px 20px;
       color: #6495ED;
       font-weight: 500; }
+      nav ul li a {
+        color: #6495ED; }
 
 footer {
   width: 100%;
@@ -154,6 +156,8 @@ footer {
         text-align: center;
         color: white;
         margin: 0px; }
+        nav ul li a {
+          color: white; }
   footer {
     height: auto;
     padding-top: 20px; }

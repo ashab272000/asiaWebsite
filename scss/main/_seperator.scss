@@ -1,0 +1,17 @@
+.v-seperator{
+    width: 1px;
+    background-color: $primaryColor;
+    height: 350px;
+    margin-right: 10px;
+}
+
+
+@include mediaMd{
+    .v-seperator{
+        width: 60%;
+        background-color: $primaryColor;
+        height: 1px;
+        margin: 0px;
+        margin-top: 10px;
+    }
+}

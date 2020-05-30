@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/colorChoose.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <div id="mobileNavButton" class="navSelected" onclick="navSelection()">
+            <div id="bar1" class="bar"></div>
+            <div id="bar2" class="bar"></div>
+            <div id="bar3" class="bar"></div>
+        </div>
+        <h2 id="nav-branding">Jotun Asia</h2>
+        <ul id="mainNav">
+            <li>
+                Home
+            </li>
+            <li>
+                Choose Colors
+            </li>
+            <li>
+                Tools
+            </li>
+            <li>
+                About Us
+            </li>
+        </ul>
+    </nav>
+    <div id="photoEditor"> 
+        <div id="editor-container">
+            <canvas id="photoEditor-canvas"></canvas>
+            <div id="photoEditor-toolbox">
+                <div id="photoEditor-toolbox-colors">
+                   <!-- <div class="fav">
+                        <div class='favColor' style='background: #E73179; width: 60px; height:60px;'></div>
+                        <h4> Jazz White  <br> 8235 </h4>
+                    </div>-->
+                </div>
+                <div id="photoEditor-toolbox-upload">
+                    <button id="chooseColorButton">
+                        <ion-icon name="color-palette-outline"></ion-icon>
+                        <h2> Choose Color </h2>
+                    </button>
+                    <input type="file" accept="image/*" id="uploadInput" style="display: none;">
+                    <button id="uploadImage">
+                        <ion-icon name="cloud-upload-outline"></ion-icon>
+                        <h2> Upload Image </h2>
+                    </button>
+                    <button id="undoButton">
+                        <ion-icon name="arrow-undo-outline"></ion-icon>
+                        <h2> Undo </h2>
+                    </button>
+                    <button id="redoButton">
+                        <ion-icon name="arrow-redo-outline"></ion-icon>
+                        <h2> Redo </h2>
+                    </button>
+                    <div id="photoEditor-toolbox-upload-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="colors-window">
+        <div id="blur-background">
+            <h2>Choose Color</h2>
+            <div id="cancel-window">
+                <div id= bar1></div>
+                <div id= bar2></div>
+            </div>
+            <div id="colors-container"></div>
+        </div>
+    </div>
+    <footer>
+        <div class="contact-group">
+            <div class="contact-group-card">
+                <div class="contact-group-card-icon">
+                    <ion-icon name="call"></ion-icon>
+                </div>
+                <div class="contact-group-card-text">
+                    <h2>Contact</h2>
+                    <p>+97126218672</p>
+                </div>
+            </div>
+            <div class="contact-group-card">
+                <div class="contact-group-card-icon">
+                    <ion-icon name="mail"></ion-icon>
+                </div>
+                <div class="contact-group-card-text">
+                    <h2>Email</h2>
+                    <p>imoncx@gmail.com</p>
+                </div> 
+            </div>
+            <div class="contact-group-card">
+                <div class="contact-group-card-icon">
+                    <ion-icon name="location"></ion-icon>
+                </div>
+                <div class="contact-group-card-text">
+                    <h2>Location</h2>
+                    <p><a href="https://www.google.com/maps/place/Jotun+Multicolor+-+Asia+Exhibition+Multiple+Colors/@24.486741,54.3723894,15z/data=!4m5!3m4!1s0x0:0x1783c4b3b22b4a93!8m2!3d24.486741!4d54.3723894?hl=en">@gmail.com</a></p>    
+                </div>
+            </div>
+        </div>
+        <div class="v-seperator"></div>
+        <div id="link-group">
+            <h2>Pages</h2>
+            <ul id="link-list">
+                <li><a href="">Home</a></li>
+                <li><a href="">Decorate Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Contacts</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script>
+        const navSelection = () => {
+            const nav = document.querySelector("#mobileNavButton");
+            const mainNav = document.querySelector("#mainNav");
+            if(nav.classList.contains("navSelected"))
+            {
+                nav.classList.remove("navSelected");
+                nav.classList.add("navUnselected");
+                mainNav.style.display = "none";
+            }else{
+                nav.classList.add("navSelected");
+                nav.classList.remove("navUnselected");
+                mainNav.style.display = "flex";
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="../js/trial/js/second.js"></script>
+</body>
+</html>

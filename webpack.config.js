@@ -5,7 +5,7 @@ module.exports = {
     //entry: './src/index.js',
     entry: {  
         'js/main': `${entryPath}/index.js`,
-        'js/second': `${entryPath}/chooseColor.js`
+        'js/second': `${entryPath}/decorateScreen.js`
     },
     output: {
       filename: '[name].js',

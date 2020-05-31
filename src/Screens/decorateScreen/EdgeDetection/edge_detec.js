@@ -1,13 +1,11 @@
-import { ImageLayer } from "../Objects/image_layer";
-
-
+import { ColorConverter } from "../Canvas/color_converter";
 
 export class EdgeDetect extends ImageLayer{
 
-    constructor(src, canvasController, colorConverter) {
+    constructor(src, canvasController) {
         super(src, canvasController);
         this._canvas = canvas;
-        this._colorConverter = colorConverter;
+        this._colorConverter = new ColorConverter();
         //edge detect works by comparing each pixel with its neighbore
         //color experiments showed that if the color is too dark or too light
         //we must compare by saturation

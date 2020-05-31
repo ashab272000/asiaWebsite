@@ -7,6 +7,11 @@ export class ImageLayer{
             this._imgData = result.img;
             this._imgTransform = result.transform;
         });
+        this._src = src;
+    }
+    
+    getSrc(){
+        return this._src;
     }
 
     getImgData()

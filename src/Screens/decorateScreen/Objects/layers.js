@@ -1,8 +1,13 @@
+import { EdgeDetect } from "../EdgeDetection/edge_detec";
+import { ImageLayer } from "./image_layer";
+
+
 
 export class Layers{
 
-    constructor()
-    {
+    constructor(canvasController)
+    {   
+        this._canvasController = canvasController;
         this.layers = {
             imgLayer:null,
             edgeLayer:null,
@@ -14,18 +19,9 @@ export class Layers{
         return this.layers;
     }
 
-    addImgLayer(imgLayer){
-        this.layers.imgLayer = imgLayer;
-        this.layers.edgeLayer = null;
-        this.layers.colorLayer = null;
-    }
-
-    addEdgeLayer(edgeLayer)
-    {
-        this.layers.edgeLayer = edgeLayer;
-    }
-    
-    addColorLayer(colorLayer){
-        this.layers.colorLayer = colorLayer;
+    addImg(src){
+        this.layers.imgLayer = new ImageLayer(src, this._canvasController);
+        this.layers.edgeLayer = new EdgeDetect(src, this._canvasController);
+        this.layers.colorLayer = new ImageLayer(src, this._canvasController);
     }
 }

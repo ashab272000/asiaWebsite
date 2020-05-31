@@ -1,6 +1,5 @@
 import {CanvasView} from "./canvas_view";
 import {ColorConverter} from "./color_converter";
-import { EdgeDetect } from "../EdgeDetection/edge_detec";
 
 export class CanvasController {
     
@@ -12,7 +11,6 @@ export class CanvasController {
         this._ctx = canvasValues.ctx;
         this._rect = canvasValues.rect;
         this._colorConverter = new ColorConverter();
-        this._edgeDetector = new EdgeDetect();
         this._setupListeners();
     }
 
@@ -26,7 +24,7 @@ export class CanvasController {
 
         //setTimeout waits for 100ms
         //It waits for the image to load
-        let timeout = setTimeout(() => {
+        setTimeout(() => {
             //clear the canvase so that an image could be drawn
             //console.log(imgLayer);
             this._canvasView.clearCanvas();

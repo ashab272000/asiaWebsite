@@ -1,19 +1,17 @@
-import { ColorConverter } from "../Canvas/color_converter";
 
-export class EdgeDetect extends ImageLayer{
+export class EdgeDetect{
 
-    constructor(src, canvasController) {
-        super(src, canvasController);
-        this._canvas = canvas;
-        this._colorConverter = new ColorConverter();
+    constructor(canvasWidth, colorConverter) {
+        this._canvasWidth = canvasWidth;
+        this._colorConverter = colorConverter;
         //edge detect works by comparing each pixel with its neighbore
         //color experiments showed that if the color is too dark or too light
         //we must compare by saturation
         //else we compare with hue
         this._direction = {
-            up : -this._canvas.width,
+            up : -this._canvasWidth,
             right : 1,
-            down : this._canvas.height,
+            down : this._canvasWidth,
             left: -1
         }
 
@@ -24,19 +22,32 @@ export class EdgeDetect extends ImageLayer{
 
     }
 
-    detectEdge(refImg, mouseX, mouseY){
 
+    /**
+     * 
+     * @param {ImageData} refImg 
+     * @param {ImageData} imgData 
+     */
+    setMainImgData(refImg, imgData){
+        this._refImg = refImg;
+        this._imgData = imgData;
+    }
+    
+
+    detectEdge(mouseX, mouseY){
+        
         //get the pixel clicked
         let pixelClicked = this._getPixelClicked(mouseX, mouseY);
 
         //get the hsl of the pixel
-        let refPixelHsl = this._colorConverter.rgbToHsl(refImg.data[pixelClicked * 4], refImg.data[pixelClicked * 4 + 1],  refImg.data[pixelClicked * 4 + 2]);
+        console.log(this._refImg);
+        let refPixelHsl = this._colorConverter.rgbToHsl(this._refImg.data[pixelClicked * 4], this._refImg.data[pixelClicked * 4 + 1],  this._refImg.data[pixelClicked * 4 + 2]);
 
         // run the algorithim
-        this._detectEdgeViaBreadth(refImg, pixelClicked, this._getComparision(refPixelHsl));
+        this._detectEdgeViaBreadth(this._refImg, pixelClicked, this._getComparision(refPixelHsl));
     }
 
-    _detectEdgeViaBreadth(refImg, pixel, comparision){
+    _detectEdgeViaBreadth(pixel, comparision){
 
         this._pixelToWhite(pixel);
         //Recursion reaches stack overflow
@@ -48,7 +59,7 @@ export class EdgeDetect extends ImageLayer{
         while (nextPixel != -1 && nextPixel !== undefined)
         {
             let currentPixel = nextPixel;
-            nextPixel = this._getNextPixel(currentPixel, comparision, refImg, direction.up, pop);
+            nextPixel = this._getNextPixel(currentPixel, comparision, this._refImg, direction.up, pop);
             if(nextPixel != -1 && nextPixel !== undefined)
             {
                 this._pixelToWhite(nextPixel);
@@ -56,7 +67,7 @@ export class EdgeDetect extends ImageLayer{
                 pop = false;
                 continue;
             }
-            nextPixel = this._getNextPixel(currentPixel, comparision, refImg, direction.right, pop);
+            nextPixel = this._getNextPixel(currentPixel, comparision, this._refImg, direction.right, pop);
             if(nextPixel != -1 && nextPixel !== undefined)
             {
                 this._pixelToWhite(nextPixel);
@@ -64,7 +75,7 @@ export class EdgeDetect extends ImageLayer{
                 pop = false;
                 continue;
             }
-            nextPixel = this._getNextPixel(currentPixel, comparision, refImg, direction.down, pop);
+            nextPixel = this._getNextPixel(currentPixel, comparision, this._refImg, direction.down, pop);
             if(nextPixel != -1 && nextPixel !== undefined)
             {
                 this._pixelToWhite(nextPixel);
@@ -72,7 +83,7 @@ export class EdgeDetect extends ImageLayer{
                 pop = false;
                 continue;
             }
-            nextPixel = this._getNextPixel(currentPixel, comparision, refImg, direction.left, pop);
+            nextPixel = this._getNextPixel(currentPixel, comparision, this._refImg, direction.left, pop);
             if(nextPixel != -1 && nextPixel !== undefined)
             {
                 this._pixelToWhite(nextPixel);
@@ -98,7 +109,9 @@ export class EdgeDetect extends ImageLayer{
 
 
     _getPixelClicked(mouseX, mouseY){
-        return (mouseX + mouseY * _canvas.width);
+        let pixel = mouseX + mouseY * this._canvasWidth;
+        console.log(pixel);
+        return pixel
     }
 
     _getComparision(pixel){
@@ -125,9 +138,9 @@ export class EdgeDetect extends ImageLayer{
         return [imgData.data[pixel * 4], imgData.data[pixel * 4 + 1], imgData.data[pixel * 4 + 2], imgData.data[pixel * 4 + 3]]
     }
 
-    _getNextPixel(currentPixel, compare, refImg, direction, isPoped){
+    _getNextPixel(currentPixel, compare, direction, isPoped){
         //get the hsl of the pixel
-        let currentHsl = this._getHsl(currentPixel, refImg);
+        let currentHsl = this._getHsl(currentPixel, this._refImg);
         let compareValue;
         let compareLightness;
         let comparePixel;
@@ -142,7 +155,7 @@ export class EdgeDetect extends ImageLayer{
         if(!(currentPixelRgbEdge[0] == 255 && currentPixelRgbEdge[1] == 255 && currentPixelRgbEdge[2] == 255 && currentPixelRgbEdge[3] == 69) )
         {
             //get the hsl for the pixel to be compared in the mainimglayer
-            comparePixelHsl = this._getHslFromRgb(currentPixel, refImg);
+            comparePixelHsl = this._getHslFromRgb(currentPixel, this._refImg);
             compareValue = Math.abs(currentHsl[compare] - comparePixelHsl[compare]);
 
             //compare == 0 means comparison has to be done in hue
@@ -154,8 +167,8 @@ export class EdgeDetect extends ImageLayer{
 
             compareLightness = currentHsl[2] - comparePixelHsl[2];
 
-            let currentRgbValue = this._getRgb(currentPixel, refImg);
-            let compareRgbValue = this._getRgb(comparePixel, refImg);
+            let currentRgbValue = this._getRgb(currentPixel, this._refImg);
+            let compareRgbValue = this._getRgb(comparePixel, this._refImg);
 
             //change this
             let rgbDiff = Math.abs(((currentRgbValue[0] + currentRgbValue[1] + currentRgbValue[2])/3) - ((compareRgbValue[0] + compareRgbValue[1] + compareRgbValue[2])/3));

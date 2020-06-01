@@ -1,11 +1,24 @@
 import {CanvasController} from "./decorateScreen/Canvas/canvas_controller";
-import {ImageLayer} from './decorateScreen/Objects/image_layer';
 import { Layers } from "./decorateScreen/Objects/layers";
 
-const canvasController = new CanvasController();
-const imgLayers = new Layers();
+const main = async () => {
+        
+    const canvasController = new CanvasController();
+    //const imgLayers = new Layers(canvasController.getCanvas().width, canvasController.getCanvas().height);
 
-imgLayers.addImgLayer(new ImageLayer('../img/img1.jpg', canvasController));
+    //await imgLayers.addImg('../img/img1.jpg');
+    //await canvasController.drawImage(await imgLayers.getImageValue());
 
-canvasController.drawImage(imgLayers.getLayer().imgLayer);
+    // const mainImageLayer = canvasController.getContextImageData();
+    // const edgeLayer = canvasController.getContextImageData();
+    // const colorLayer = canvasController.getContextImageData();
 
+    // imgLayers.addLayer(mainImageLayer, edgeLayer, colorLayer);
+
+    
+
+    //canvasController.putImageData(imgLayers.getLayer().edgeLayer.getImageData());
+
+}
+
+main();

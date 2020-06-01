@@ -1,5 +1,7 @@
 import {CanvasView} from "./canvas_view";
 import {ColorConverter} from "./color_converter";
+import { EdgeDetect } from "../EdgeDetection/edge_detec";
+import { Layers } from "../Objects/layers";
 
 export class CanvasController {
     
@@ -11,33 +13,68 @@ export class CanvasController {
         this._ctx = canvasValues.ctx;
         this._rect = canvasValues.rect;
         this._colorConverter = new ColorConverter();
+        this._edgeDetector = new EdgeDetect(this._canvas.width, this._colorConverter);
+        this._canvasTop = this._rect.top + pageYOffset;
         this._setupListeners();
+        this._setupCanvas().then();
     }
+
+    async _setupCanvas(){
+        this._layers = new Layers(this._canvas.width, this._canvas.height);
+        await this._layers.addImg('../img/img1.jpg');
+        await this.drawImage(await this._layers.getImageValue());
+
+        this._setupLayers();
+        this._setupEdgeDetector();
+    }
+
+    _setupLayers(){
+        const mainImageLayer = this._getContextImageData();
+        const edgeLayer = this._getContextImageData();
+        const colorLayer = this._getContextImageData();
+    
+        this._layers.addLayer(mainImageLayer, edgeLayer, colorLayer);
+
+        console.log(this._layers);
+    }
+
+    _setupEdgeDetector(){
+        console.log(this._layers.getLayer().imgLayer);
+        this._edgeDetector.setMainImgData(this._layers.getLayer().imgLayer, this._layers.getLayer().edgeLayer);
+    }
+
+
 
     getCanvas(){
         return this._canvas;
     }
+
+
     
     //load a specific image
     //loadImage(src = "../img/pagol2.jpg"){
-    drawImage(imgLayer){
-
+    async drawImage(imageObject){
         //setTimeout waits for 100ms
         //It waits for the image to load
-        setTimeout(() => {
-            //clear the canvase so that an image could be drawn
-            //console.log(imgLayer);
-            this._canvasView.clearCanvas();
+        //clear the canvase so that an image could be drawn
+        //console.log(imgLoader);
+        this._canvasView.clearCanvas();
 
-            //create a new image object with the src specified
-            let img = imgLayer.getImgData();
-            let imgTransform = imgLayer.getImgTransform();
+        //create a new image object with the src specified
+        let img = await  imageObject.image;
+        let imgTransform = await imageObject.transform;
 
-            this._ctx.drawImage(img, imgTransform.x, imgTransform.y, imgTransform.width, imgTransform.height);
+        this._ctx.drawImage(img, imgTransform.x, imgTransform.y, imgTransform.width, imgTransform.height);
 
-        },300);
+    }
 
+    _getContextImageData(){
+        //this._ctx.getImageData(0, 0, this._canvas.width, this._canvas.height);
+        return this._ctx.getImageData(0, 0, this._canvas.width, this._canvas.height);
+    }
 
+    putImageData(imageData){
+        this._ctx.putImageData(imageData, 0, 0);
     }
 
     
@@ -120,7 +157,7 @@ export class CanvasController {
     }
 
 
-    canvasClicked(e){
+    _canvasClicked(e){
 
         //there few different layers that the program will work with
         //1. Main layer
@@ -136,7 +173,9 @@ export class CanvasController {
 
         //get the mouse position
         let mousePosition = this._getMousePosition(e);
-
+        console.log(mousePosition);
+        this._edgeDetector.detectEdge(mousePosition.x, mousePosition.y);
+        this.putImageData(this._layers.getLayer().edgeLayer);
         //detectEdge(mousePosition);
 
 
@@ -146,7 +185,7 @@ export class CanvasController {
         const editor = this._canvasView.getEditor();
         let margin = parseInt(editor.style.marginLeft.replace("px",""));
         let mouseX = e.clientX - this._rect.left - margin;
-        let mouseY = e.clientY - canvasTop + pageYOffset;
+        let mouseY = e.clientY - this._canvasTop + pageYOffset;
 
         return {
             x : mouseX,
@@ -154,70 +193,9 @@ export class CanvasController {
         }
     }
 
-    loadImageData(src, callback){
-        const img = new Image();
-    
-        //when the image loads
-        //fit the image to the canvas
-        img.onload = () => {
-            
-            let transform = this._getImageTransform(img.width, img.height)
-            img.width = transform.width;
-            img.height= transform.height;
-            let result = {
-                img: img,
-                transform: transform
-            };
-            callback(result);
-
-        };
-
-        //img source should be set after the image.onload() function
-        img.src = src;
-
-    }
-
-    _getImageTransform(imgWidth, imgHeight){
-        let x = 0;
-        let y = 0;
-        let width = imgWidth;
-        let height = imgHeight;
-        //get the ratio of width:height of the image
-        let imgRatio = width/height;
-        //get the ratio of width:height of the canvas
-        let canvasRatio = this._canvas.width/this._canvas.height;
-
-        //we run a check
-        //to know if the image size is a landscape or a potrait
-        //landscape: width of image = width of canvas, height is calculated based on the image ratio
-        //potrait: height of image = height of canvas, width is calculated based on the image ratio
-        //check if image is landscape
-        if(imgRatio > canvasRatio)
-        {
-            width = this._canvas.width;
-            height = width/(imgRatio);
-            x = 0;
-            y= (this._canvas.height - height)/2;
-        }else
-        {
-            height = this._canvas.height;
-            width = height * imgRatio;
-            y = 0;
-            x = (this._canvas.width - width)/2;
-        }
-
-        return {
-            width: width,
-            height: height,
-            x:x,
-            y:y
-        }
-    }
-
-
     _setupListeners(){
         this._canvas.addEventListener("click", (e) => {
-            canvasClicked(e);
+            this._canvasClicked(e);
         });
         window.addEventListener("orientationChange", (e) => {
             this.resizeCanvas();

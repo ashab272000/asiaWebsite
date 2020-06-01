@@ -1,62 +1,59 @@
 
-export class ImageLayer{
+export class ImageLoader{
 
-    constructor(src, canvasController){
-        this._canvasController = canvasController;
-        this._loadImageData(src, (result) => {
-            this._imgData = result.img;
-            this._imgTransform = result.transform;
-        });
-        this._src = src;
+    constructor(canvasWidth, canvasHeight){
+        this._canvasWidth = canvasWidth;
+        this._canvasHeight = canvasHeight;
+        this._imagePromise = null;
     }
     
-    getSrc(){
-        return this._src;
-    }
-
-    getImgData()
+    async getImg()
     {
-        console.log(this._imgData);
-        return this._imgData;
+        let imageValues = await this._imagePromise;
+
+        return imageValues.img;
     }
 
-    getImgTransform(){
-        console.log(this._imgTransform);
-        return this._imgTransform;
+    async getImgTransform(){
+
+        let imageValues = await this._imagePromise;
+
+        return imageValues.transform;
     }
 
-
-    
-    _loadImageData(src, callback){
+    async _loadImageData(src){
         const img = new Image();
         let result;
     
         //when the image loads
         //fit the image to the canvas
-        img.onload = () => {
+        this._imagePromise = new Promise(
+            resolve => {
+                img.onload = () => {
             
-            let transform = this._getImageTransform(img.width, img.height)
-            img.width = transform.width;
-            img.height= transform.height;
-            result = {
-                img: img,
-                transform: transform
-            };
-            callback(result);
-            
-        };
+                    let transform = this._getImageTransform(img.width, img.height)
+                    img.width = transform.width;
+                    img.height= transform.height;
+                    result = {
+                        img: img,
+                        transform: transform
+                    };
+                    resolve(result);
+                    
+                };
+            }
+        );
+        
 
         //img source should be set after the image.onload() function
         img.src = src;
 
-        return result;
     }
 
     
     _getImageTransform(imgWidth, imgHeight){
 
         //get the canvas
-        let canvas = this._canvasController.getCanvas();
         let x = 0;
         let y = 0;
         let width = imgWidth;
@@ -64,7 +61,7 @@ export class ImageLayer{
         //get the ratio of width:height of the image
         let imgRatio = width/height;
         //get the ratio of width:height of the canvas
-        let canvasRatio = canvas.width/canvas.height;
+        let canvasRatio = this._canvasWidth/this._canvasHeight;
 
         //we run a check
         //to know if the image size is a landscape or a potrait
@@ -73,16 +70,16 @@ export class ImageLayer{
         //check if image is landscape
         if(imgRatio > canvasRatio)
         {
-            width = canvas.width;
+            width = this._canvasWidth;
             height = width/(imgRatio);
             x = 0;
-            y= (canvas.height - height)/2;
+            y= (this._canvasHeight - height)/2;
         }else
         {
-            height = canvas.height;
+            height = this._canvasHeight;
             width = height * imgRatio;
             y = 0;
-            x = (canvas.width - width)/2;
+            x = (this._canvasWidth - width)/2;
         }
 
         return {

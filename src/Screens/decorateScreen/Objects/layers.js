@@ -1,27 +1,49 @@
-import { EdgeDetect } from "../EdgeDetection/edge_detec";
-import { ImageLayer } from "./image_layer";
+
+import { ImageLoader } from "./imageloader";
 
 
 
 export class Layers{
 
-    constructor(canvasController)
+    constructor(canvasWidth, canvasHeight)
     {   
-        this._canvasController = canvasController;
-        this.layers = {
+        this._canvasWidth = canvasWidth;
+        this._canvasHeight = canvasHeight;
+        this._imageLoader = new ImageLoader(canvasWidth, canvasHeight);
+        this._layers = {
             imgLayer:null,
             edgeLayer:null,
             colorLayer:null
         };
+        this._image = {
+            image: null,
+            transform: null
+        }
     }
 
     getLayer(){
-        return this.layers;
+        return this._layers;
     }
 
-    addImg(src){
-        this.layers.imgLayer = new ImageLayer(src, this._canvasController);
-        this.layers.edgeLayer = new EdgeDetect(src, this._canvasController);
-        this.layers.colorLayer = new ImageLayer(src, this._canvasController);
+    async getImageValue(){
+        return this._image;
+    }
+
+    addLayer(imageData, edgeImageData, colorImageData){
+        this._layers.imgLayer = imageData;
+        this._layers.edgeLayer = edgeImageData;
+        this._layers.colorLayer = colorImageData;
+
+    }
+
+    async addImg(src){
+        await this._imageLoader._loadImageData(src);
+        this._image.image = await this._imageLoader.getImg();
+        this._image.transform = await this._imageLoader.getImgTransform();
+
+        console.log(this._image);
+        // this._layers.imgLayer = new ImageLayer(src, this._canvasController);
+        // this._layers.edgeLayer = new EdgeDetect(src, this._canvasController, this._layers.imgLayer);
+        // this._layers.colorLayer = new ImageLayer(src, this._canvasController);
     }
 }

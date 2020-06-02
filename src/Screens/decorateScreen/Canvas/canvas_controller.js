@@ -43,16 +43,11 @@ export class CanvasController {
         this._edgeDetector.setMainImgData(this._layers.getLayer().imgLayer, this._layers.getLayer().edgeLayer);
     }
 
-
-
     getCanvas(){
         return this._canvas;
     }
 
-
-    
-    //load a specific image
-    //loadImage(src = "../img/pagol2.jpg"){
+    //load a specific image object
     async drawImage(imageObject){
         //setTimeout waits for 100ms
         //It waits for the image to load
@@ -151,7 +146,8 @@ export class CanvasController {
         let mousePosition = this._getMousePosition(e);
         console.log(mousePosition);
         this._edgeDetector.detectEdge(mousePosition.x, mousePosition.y);
-        this.putImageData(this._layers.getLayer().edgeLayer);
+        this._layers.getLayer().edgeLayer = this._edgeDetector.getEdgeData();
+        this._ctx.putImageData(this._layers.getLayer().edgeLayer, 0, 0);
 
     };
 

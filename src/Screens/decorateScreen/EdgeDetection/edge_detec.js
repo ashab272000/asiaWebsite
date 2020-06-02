@@ -32,6 +32,10 @@ export class EdgeDetect{
         this._refImg = refImg;
         this._imgData = imgData;
     }
+
+    getEdgeData(){
+        return this._imgData;
+    }
     
 
     detectEdge(mouseX, mouseY){
@@ -40,11 +44,10 @@ export class EdgeDetect{
         let pixelClicked = this._getPixelClicked(mouseX, mouseY);
 
         //get the hsl of the pixel
-        console.log(this._refImg);
         let refPixelHsl = this._colorConverter.rgbToHsl(this._refImg.data[pixelClicked * 4], this._refImg.data[pixelClicked * 4 + 1],  this._refImg.data[pixelClicked * 4 + 2]);
 
         // run the algorithim
-        this._detectEdgeViaBreadth(this._refImg, pixelClicked, this._getComparision(refPixelHsl));
+        this._detectEdgeViaBreadth(pixelClicked, this._getComparision(refPixelHsl));
     }
 
     _detectEdgeViaBreadth(pixel, comparision){
@@ -52,14 +55,14 @@ export class EdgeDetect{
         this._pixelToWhite(pixel);
         //Recursion reaches stack overflow
         //therefore, using "Recursion" with while loop
-        let nextPixel;
-        let pixelsTraversed = []
+        let nextPixel = pixel;
+        let pixelsTraversed = [];
         let pop = false;
 
         while (nextPixel != -1 && nextPixel !== undefined)
         {
             let currentPixel = nextPixel;
-            nextPixel = this._getNextPixel(currentPixel, comparision, this._refImg, direction.up, pop);
+            nextPixel = this._getNextPixel(currentPixel, comparision, this._direction.up, pop);
             if(nextPixel != -1 && nextPixel !== undefined)
             {
                 this._pixelToWhite(nextPixel);
@@ -67,7 +70,7 @@ export class EdgeDetect{
                 pop = false;
                 continue;
             }
-            nextPixel = this._getNextPixel(currentPixel, comparision, this._refImg, direction.right, pop);
+            nextPixel = this._getNextPixel(currentPixel, comparision, this._direction.right, pop);
             if(nextPixel != -1 && nextPixel !== undefined)
             {
                 this._pixelToWhite(nextPixel);
@@ -75,7 +78,7 @@ export class EdgeDetect{
                 pop = false;
                 continue;
             }
-            nextPixel = this._getNextPixel(currentPixel, comparision, this._refImg, direction.down, pop);
+            nextPixel = this._getNextPixel(currentPixel, comparision, this._direction.down, pop);
             if(nextPixel != -1 && nextPixel !== undefined)
             {
                 this._pixelToWhite(nextPixel);
@@ -83,7 +86,7 @@ export class EdgeDetect{
                 pop = false;
                 continue;
             }
-            nextPixel = this._getNextPixel(currentPixel, comparision, this._refImg, direction.left, pop);
+            nextPixel = this._getNextPixel(currentPixel, comparision, this._direction.left, pop);
             if(nextPixel != -1 && nextPixel !== undefined)
             {
                 this._pixelToWhite(nextPixel);
@@ -91,7 +94,7 @@ export class EdgeDetect{
                 pop = false;
                 continue;
             }else{
-                nextPixel = pixels.pop();
+                nextPixel = pixelsTraversed.pop();
                 pop = true;
             } 
         }
@@ -110,7 +113,6 @@ export class EdgeDetect{
 
     _getPixelClicked(mouseX, mouseY){
         let pixel = mouseX + mouseY * this._canvasWidth;
-        console.log(pixel);
         return pixel
     }
 
@@ -140,19 +142,19 @@ export class EdgeDetect{
 
     _getNextPixel(currentPixel, compare, direction, isPoped){
         //get the hsl of the pixel
-        let currentHsl = this._getHsl(currentPixel, this._refImg);
-        let compareValue;
-        let compareLightness;
-        let comparePixel;
-        let comparePixelHsl;
+        let currentHsl = this._getHslFromRgb(currentPixel, this._refImg);
+        let compareValue = 0;
+        let compareLightness = 0;
+        let comparePixel = 0;
+        let comparePixelHsl = 0;
 
         //compare the pixel above
         comparePixel = currentPixel + (direction);
 
         //get the rgb value of the pixel of the edgeimg layer
         //check if the pixel is already part of the pixel
-        let currentPixelRgbEdge = _getRgb(currentPixel, this._imgData);
-        if(!(currentPixelRgbEdge[0] == 255 && currentPixelRgbEdge[1] == 255 && currentPixelRgbEdge[2] == 255 && currentPixelRgbEdge[3] == 69) )
+        let comparePixelRgbEdge = this._getRgb(comparePixel, this._imgData);
+        if(!(comparePixelRgbEdge[0] == 255 && comparePixelRgbEdge[1] == 255 && comparePixelRgbEdge[2] == 255 && comparePixelRgbEdge[3] == 69) )
         {
             //get the hsl for the pixel to be compared in the mainimglayer
             comparePixelHsl = this._getHslFromRgb(currentPixel, this._refImg);
@@ -173,15 +175,16 @@ export class EdgeDetect{
             //change this
             let rgbDiff = Math.abs(((currentRgbValue[0] + currentRgbValue[1] + currentRgbValue[2])/3) - ((compareRgbValue[0] + compareRgbValue[1] + compareRgbValue[2])/3));
 
-            if( compareValue < 0.03 && compareLightness > -0.06 && compareLightness < 0.06 && rgbDiff < 5)
+            if( compareValue < 0.03 && compareLightness > -0.03 && compareLightness < 0.03 && rgbDiff < 5)
             {
                 //this gets the avg values of lightness and saturation
+                /*
                 if(!isPoped)
                 {
-                    let compareHsl = rgbToHsl(...compareRgbValue);
+                    let compareHsl = this._colorConverter.rgbToHsl(...compareRgbValue);
                     avgL = (avgL + compareHsl[2])/2;
                     avgS = (avgS + compareHsl[1])/2; 
-                }
+                }*/
                 return comparePixel;
             }else{
                 return -1;

@@ -6,7 +6,10 @@ module.exports = {
     entry:{  
             'js/main': ["babel-polyfill", `${entryPath}/index.js`],
             'js/second': ["babel-polyfill",`${entryPath}/decorateScreen.js`],
-        },
+    },
+    devServer:{
+        contentBase: './dist',
+    },
     output: {
       filename: '[name].js',
       path: path.resolve(__dirname, 'dist/js/trial'),

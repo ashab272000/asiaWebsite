@@ -102,43 +102,19 @@ export class CanvasController {
 
             if(edgeImg.data[i] == 255 && edgeImg.data[i+1] == 255 && edgeImg.data[i+2] ==  255){
 
-                //lightness formula
                 avgCounter++;
-                
     
                 let lightness;
                 let saturation;
-                /*         
-                lightness = (((selectedHsl[2] * 100) + (((0.5 - hsl[2]) + hsl[2])- lowestL) * 100)) / (highestL * 100) ;
-                if(selectedHsl[2] < 0.4){
-                    lightness = ((hsl[2] * lightness));
-                }
-                else{
-                    lightness = (lightness + (hsl[2] * lightness))/2;
-                }*/
-
-                //saturation formula
-                //saturation = (selectedHsl[1]  + hsl[1])/2 ;  
                 
-                //pretty good
-                //lightness = selectedHsl[2] + (hsl[2] - selectedHsl[2] + (-(highestL+ lowestL) / 2) + selectedHsl[2]);
                 lightness = (selectedHsl[2]) + ((hsl[2])+ (-(avgL)));
                 lightness *= (selectedHsl[2] * 0.85);
                 lightness = (lightness + selectedHsl[2])/2;
                 avgLightness += lightness;
-                //saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6));
 
-                //saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6)) + ((((0.92+0.42)/2) - selectedHsl[2]) * (10/25));
                 saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6));
                 saturation = (selectedHsl[1] + saturation)/2;
-                //saturation = selectedHsl[1];
-                //saturation = selectedHsl[1] - (selectedHsl[1] * avgL * selectedHsl[2]);
 
-
-
-                //saturation = (selectedHsl[1] - 0.7) + ((hsl[1] * 100)/((1 + (selectedHsl[1] - 0.7)) * 100));
-                //saturation = selectedHsl[1] - (hsl[1] * hsl[2]) + (selectedHsl[1] * lightness);
-                //saturation = selectedHsl[1] - (hsl[1] - selectedHsl[1] + (-(highestS+ lowestS) / 2) + selectedHsl[1]);
                 //convert hsl to rgb
                 let rgb = hslToRgb(selectedHsl[0], saturation, lightness);
 
@@ -176,8 +152,6 @@ export class CanvasController {
         console.log(mousePosition);
         this._edgeDetector.detectEdge(mousePosition.x, mousePosition.y);
         this.putImageData(this._layers.getLayer().edgeLayer);
-        //detectEdge(mousePosition);
-
 
     };
 

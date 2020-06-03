@@ -2,19 +2,26 @@ import {CanvasView} from "./canvas_view";
 import {ColorConverter} from "./color_converter";
 import { EdgeDetect } from "../EdgeDetection/edge_detec";
 import { Layers } from "../Objects/layers";
+import { ColorFiller } from './coloring';
 
 export class CanvasController {
     
 
     constructor() {
         this._canvasView = new CanvasView();
+
         const canvasValues = this._canvasView.getCanvasValues();
         this._canvas = canvasValues.canvas;
         this._ctx = canvasValues.ctx;
         this._rect = canvasValues.rect;
+
         this._colorConverter = new ColorConverter();
         this._edgeDetector = new EdgeDetect(this._canvas.width, this._colorConverter);
+        this._colorFiller = new ColorFiller(this._colorConverter);
+        //pageYOffset is part of window
+        //thus, it is a global variable
         this._canvasTop = this._rect.top + pageYOffset;
+
         this._setupListeners();
         this._setupCanvas().then();
     }
@@ -73,59 +80,59 @@ export class CanvasController {
     }
 
     
-    //change the color of the image
-    changeImage (mainHsl,data,changeData, edgeData){
+    // //change the color of the image
+    // changeImage (mainHsl,data,changeData, edgeData){
 
-        //initiate the variables for the lowest and highest fro lightness and saturation(get constants)
-        let lowestS = edgeData[1];
-        let highestS = edgeData[2];
-        let lowestL = edgeData[3];
-        let highestL = edgeData[4];
-        let edgeImg = edgeData[0];
+    //     //initiate the variables for the lowest and highest fro lightness and saturation(get constants)
+    //     let lowestS = edgeData[1];
+    //     let highestS = edgeData[2];
+    //     let lowestL = edgeData[3];
+    //     let highestL = edgeData[4];
+    //     let edgeImg = edgeData[0];
 
-        //convert the selected color from rgb to hsl
-        let selectedHsl = rgbToHsl(...selectedColor);
-        let avgLightness = 0;
-        let avgSaturation = 0;
-        let avgCounter = 0;
+    //     //convert the selected color from rgb to hsl
+    //     let selectedHsl = rgbToHsl(...selectedColor);
+    //     let avgLightness = 0;
+    //     let avgSaturation = 0;
+    //     let avgCounter = 0;
 
-        //go through the all the pixels in the image
-        for (let i = 0; i < edgeImg.data.length; i+=4) {
+    //     //go through the all the pixels in the image
+    //     for (let i = 0; i < edgeImg.data.length; i+=4) {
             
-            //convert the pixel color to hsl
-            let hsl = rgbToHsl(data.data[i],data.data[i+1], data.data[i+2])
+    //         //convert the pixel color to hsl
+    //         let hsl = rgbToHsl(data.data[i],data.data[i+1], data.data[i+2])
 
-            if(edgeImg.data[i] == 255 && edgeImg.data[i+1] == 255 && edgeImg.data[i+2] ==  255){
+    //         if(edgeImg.data[i] == 255 && edgeImg.data[i+1] == 255 && edgeImg.data[i+2] ==  255){
 
-                avgCounter++;
+    //             avgCounter++;
     
-                let lightness;
-                let saturation;
+    //             let lightness;
+    //             let saturation;
                 
-                lightness = (selectedHsl[2]) + ((hsl[2])+ (-(avgL)));
-                lightness *= (selectedHsl[2] * 0.85);
-                lightness = (lightness + selectedHsl[2])/2;
-                avgLightness += lightness;
+    //             lightness = (selectedHsl[2]) + ((hsl[2])+ (-(avgL)));
+    //             lightness *= (selectedHsl[2] * 0.85);
+    //             lightness = (lightness + selectedHsl[2])/2;
+    //             avgLightness += lightness;
 
-                saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6));
-                saturation = (selectedHsl[1] + saturation)/2;
+    //             saturation = selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2]) * 0.6));
+    //             saturation = (selectedHsl[1] + saturation)/2;
 
-                //convert hsl to rgb
-                let rgb = hslToRgb(selectedHsl[0], saturation, lightness);
+    //             //convert hsl to rgb
+    //             let rgb = hslToRgb(selectedHsl[0], saturation, lightness);
 
-                //change the image data
-                changeData.data[i] = rgb[0];
-                changeData.data[i+1] = rgb[1];
-                changeData.data[i+2] = rgb[2];
-            }
-        }
+    //             //change the image data
+    //             changeData.data[i] = rgb[0];
+    //             changeData.data[i+1] = rgb[1];
+    //             changeData.data[i+2] = rgb[2];
+    //         }
+    //     }
 
-        //put the image data when done
-        ctx.putImageData(changeData,0,0);
-        console.log("selectedHsl[1]: " + selectedHsl[1]+" selectedHsl[2]: " + selectedHsl[2]);
-        console.log("highest saturation: " + (selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2] ) * 0.6))))
-        console.log(`Lightness value:  ${avgLightness/avgCounter}`);
-    }
+    //     //put the image data when done
+    //     ctx.putImageData(changeData,0,0);
+    //     console.log("selectedHsl[1]: " + selectedHsl[1]+" selectedHsl[2]: " + selectedHsl[2]);
+    //     console.log("highest saturation: " + (selectedHsl[1] - (selectedHsl[1] * ((selectedHsl[2] ) * 0.6))))
+    //     console.log(`Lightness value:  ${avgLightness/avgCounter}`);
+    // }
 
 
     _canvasClicked(e){
@@ -147,7 +154,11 @@ export class CanvasController {
         console.log(mousePosition);
         this._edgeDetector.detectEdge(mousePosition.x, mousePosition.y);
         this._layers.getLayer().edgeLayer = this._edgeDetector.getEdgeData();
-        this._ctx.putImageData(this._layers.getLayer().edgeLayer, 0, 0);
+        this._layers.getLayer().colorLayer = this._colorFiller.fillColor(this._layers.getLayer().imgLayer,this._layers.getLayer().edgeLayer, this._layers.getLayer().colorLayer, [145, 197, 34]);
+        this._ctx.putImageData(this._layers.getLayer().colorLayer, 0, 0);
+
+        
+        //this._ctx.putImageData(this._layers.getLayer().edgeLayer, 0, 0);
 
     };
 

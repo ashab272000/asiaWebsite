@@ -12,19 +12,13 @@ export class ToolboxController {
         this._primaryColor = '#70c1ff';
         this._setupListeners();
         this._selectedColor;
-        this.setUpColors();
     }
 
 
     _setupListeners(){
         
         this._toolboxView.chooseColorButton.addEventListener("click", ()=>{
-            this._toolboxView.gallery.style.visibility = "visible";
-        });
-
-        //
-        this._toolboxView.galleryCancelButton.addEventListener("click", () =>{
-            this._toolboxView.gallery.style.visibility= "hidden";
+            this._galleryController.openGallery();
         });
 
         /*
@@ -48,31 +42,7 @@ export class ToolboxController {
         */
     }
 
-    setUpColors(){
-
-        let colorTools = document.getElementsByClassName("colorTool");
-        
-        for(let i = 0; i < colorTools.length; i++)
-        {
-            colorTools[i].addEventListener("click", () => {
-                //document.querySelector("#photoEditor-toolbox-colors").style.display = "block";
-                this._toolboxView.gallery.style.visibility= "hidden";
-                colorTools[i].style.borderColor = "white";
-                this._toolboxModel.addFavColorIndex(i);
-                console.log(this._toolboxModel.getFavColors()); 
-            });
     
-            colorTools[i].addEventListener("mouseover", () => {
-                colorTools[i].style.borderColor = this._primaryColor ;
-            });
-            colorTools[i].addEventListener("mouseout", () => {
-                colorTools[i].style.borderColor = "white";
-            });
-        }
-    
-    
-    };
-
     
     addFavColorHtml(num){
     

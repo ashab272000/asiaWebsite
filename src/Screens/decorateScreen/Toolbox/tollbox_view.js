@@ -12,4 +12,8 @@ export class ToolboxView{
         this.redoButton = document.querySelector("#redoButton");
     }
 
+    addFavColorHtml(){
+        
+    }
+
 }

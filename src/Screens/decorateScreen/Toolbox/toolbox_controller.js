@@ -1,14 +1,18 @@
 import { ToolboxView } from "./tollbox_view";
 import { GalleryController } from "./gallery_controller";
+import { ToolboxModel } from "./toolbox_model";
 
 export class ToolboxController {
 
     constructor()
     {
-        
         this._toolboxView = new ToolboxView();
-        this._galleryControllet = new GalleryController();
+        this._toolboxModel = new ToolboxModel();
+        this._galleryController = new GalleryController();
+        this._primaryColor = '#70c1ff';
         this._setupListeners();
+        this._selectedColor;
+        this.setUpColors();
     }
 
 
@@ -51,15 +55,15 @@ export class ToolboxController {
         for(let i = 0; i < colorTools.length; i++)
         {
             colorTools[i].addEventListener("click", () => {
-                changeSelectedColor(colorTools[i]);
                 //document.querySelector("#photoEditor-toolbox-colors").style.display = "block";
-                colorWindow.style.visibility= "hidden";
+                this._toolboxView.gallery.style.visibility= "hidden";
                 colorTools[i].style.borderColor = "white";
-                addFavColor(i);
+                this._toolboxModel.addFavColorIndex(i);
+                console.log(this._toolboxModel.getFavColors()); 
             });
     
             colorTools[i].addEventListener("mouseover", () => {
-                colorTools[i].style.borderColor = primaryColor ;
+                colorTools[i].style.borderColor = this._primaryColor ;
             });
             colorTools[i].addEventListener("mouseout", () => {
                 colorTools[i].style.borderColor = "white";
@@ -69,30 +73,6 @@ export class ToolboxController {
     
     };
 
-    addFavColor(index){
-    
-        let num = colorChosen.length - 1;
-        //check where the first null is
-        //save that index to num
-        for(let i = 0; i < colorChosen.length ; i++)
-        {
-            if(colorChosen[i] == null)
-            {
-                num = i;
-                break;
-            }
-        }
-        //shift all the elements to the right
-        //make space for the new color choses
-        for(let j = num; j > 0; j--)
-        {
-            colorChosen[j] = colorChosen[j - 1]; 
-        }
-        colorChosen[0] = index;
-    
-        addFavColorHtml(num);
-    
-    };
     
     addFavColorHtml(num){
     

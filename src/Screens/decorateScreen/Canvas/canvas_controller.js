@@ -40,16 +40,12 @@ export class CanvasController {
 
     _setupLayers(){
         const mainImageLayer = this._getContextImageData();
-        const edgeLayer = this._getContextImageData();
-        const colorLayer = this._getContextImageData();
-    
-        this._layers.createLayer(mainImageLayer, edgeLayer, colorLayer);
+        this._layers.createLayer(mainImageLayer);
+        this._ctx.putImageData(this._layers.getColorLayer(), 0, 0);
 
-        console.log(this._layers);
     }
 
     _setupEdgeDetector(){
-        console.log(this._layers.getImgLayer());
         this._edgeDetector.setMainImgData(this._layers.getImgLayer(), this._layers.getEdgeLayer());
     }
 
@@ -59,7 +55,6 @@ export class CanvasController {
         //setTimeout waits for 100ms
         //It waits for the image to load
         //clear the canvase so that an image could be drawn
-        //console.log(imgLoader);
         this._canvasView.clearCanvas();
         
         //create a new image object with the src specified
@@ -92,7 +87,6 @@ export class CanvasController {
         
         //get the mouse position
         let mousePosition = this._getMousePosition(e);
-        console.log(mousePosition);
         //detect the edge
         this._edgeDetector.detectEdge(mousePosition.x, mousePosition.y);
         //get the edge data from the edge detector
@@ -146,7 +140,7 @@ export class CanvasController {
 
     undo(){
         this._layers.undo();
-        this._ctx.putImageData(this._layers.getColorLayer(), 100, 100);
+        this._ctx.putImageData(this._layers.getColorLayer(), 0, 0);
     }
 
     redo(){

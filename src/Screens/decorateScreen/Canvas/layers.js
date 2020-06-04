@@ -12,29 +12,30 @@ export class Layers{
         this._imageLoader = new ImageLoader(canvasWidth, canvasHeight);
         this._layers = {
             imgLayer:null,
-            edgeLayer:null,
-            colorLayer:null
+            history : []
         };
+        this._currentLayer = -1;
         this._image = {
             image: null,
             transform: null
         }
     }
 
-    getLayer(){
-        return this._layers;
+    
+    addLayer(edgeData, colorData){
+        //this._layers.history.push([edgeData, colorData]);
+        let history = this._layers.history.slice(0, this._currentLayer + 1);
+        history.push([edgeData, colorData]);
+        this._currentLayer++;
+        this._layers.history = history;
+        if(history.length > 2)
+            console.log(`testing ${history[this._currentLayer][1].data[103847] == history[this._currentLayer - 1][1].data[103847]}`);
     }
     getEdgeLayer(){
-        return this._layers.edgeLayer;
-    }
-    setEdgeLayer(data) {
-        this._layers.edgeLayer = data;
+        return this._layers.history[this._currentLayer][0];
     }
     getColorLayer(){
-        return this._layers.colorLayer;
-    }
-    setColorLayer(data) {
-        this._layers.colorLayer = data;
+        return this._layers.history[this._currentLayer][1];
     }
     getImgLayer(){
         return this._layers.imgLayer;
@@ -44,10 +45,9 @@ export class Layers{
         return this._image;
     }
 
-    addLayer(imageData, edgeImageData, colorImageData){
+    createLayer(imageData, edgeImageData, colorImageData){
         this._layers.imgLayer = imageData;
-        this._layers.edgeLayer = edgeImageData;
-        this._layers.colorLayer = colorImageData;
+        this.addLayer(edgeImageData, colorImageData);
 
     }
 
@@ -55,10 +55,21 @@ export class Layers{
         await this._imageLoader._loadImageData(src);
         this._image.image = await this._imageLoader.getImg();
         this._image.transform = await this._imageLoader.getImgTransform();
+    }
 
-        console.log(this._image);
-        // this._layers.imgLayer = new ImageLayer(src, this._canvasController);
-        // this._layers.edgeLayer = new EdgeDetect(src, this._canvasController, this._layers.imgLayer);
-        // this._layers.colorLayer = new ImageLayer(src, this._canvasController);
+    
+    undo(){
+        console.log("undo is done");
+        if(this._currentLayer > 0)
+        {
+            this._currentLayer--;
+            console.log(this._currentLayer);
+        }
+    }
+
+    redo(){
+        if(this._currentLayer < this._layers.history.length - 1){
+            this._currentLayer++;
+        }
     }
 }

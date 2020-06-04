@@ -7,13 +7,14 @@ export class ToolboxController {
     {
         this._toolboxView = new ToolboxView();
         this._primaryColor = '#70c1ff';
-        this._setupListeners();
         this._selectedColor;
 
     }
     
-    init(galleryController){
+    init(canvasController,galleryController){
         this._galleryController = galleryController;
+        this._canvasController = canvasController;
+        this._setupListeners();
     }
     
     addColorToFavBox(i)
@@ -29,25 +30,14 @@ export class ToolboxController {
             this._galleryController.openGallery();
         });
 
-        /*
         this._toolboxView.undoButton.addEventListener("click", () => {
-            let imgData = undo();
-            console.log("undoButton clicked");
-            if(imgData != null)
-            {
-                ctx.putImageData(imgData, 0, 0);
-            }
+            this._canvasController.undo();
         });
 
         this._toolboxView.redoButton.addEventListener("click", () => {
-            let imgData = redo();
-
-            if(imgData)
-            {
-                ctx.putImageData(imgData, 0, 0);
-            }
+            console.log('redo is done');
+            this._canvasController.redo();
         });
-        */
     }
     
 }

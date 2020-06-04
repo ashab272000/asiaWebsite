@@ -1,5 +1,4 @@
-import { FavouriteColors } from "./favouriteColor";
-
+import {Colors} from './favouriteColor';
 
 export class GalleryView{
 
@@ -10,7 +9,9 @@ export class GalleryView{
         this._primaryColor = '#70c1ff';
     }
 
-    addColor(colorHex, i){
+    addColor(i, callback){
+        let colorHex = Colors.colors[i];
+        //console.log(`Index: ${i}, Colors.colors[i]: ${Colors.colors[i]}`);
         //select the parent element where the html will be inserted to
         const parent = document.querySelector("#colors-container");
         //the html string to be inserted
@@ -22,9 +23,9 @@ export class GalleryView{
         //add a listener to the child
         //used last child instead of children[i]
         parent.lastChild.addEventListener('click', (e) => {
-            this._gallery.style.visibility = "hidden";
+            this._galleryCancelButton.click();
+            callback(i);
             e.target.style.borderColor = "white";   
-            FavouriteColors.addColorIndex(i);
         });
 
         parent.lastChild.addEventListener("mouseover", (e) => {

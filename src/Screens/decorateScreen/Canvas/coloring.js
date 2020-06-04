@@ -1,3 +1,4 @@
+import {Colors} from '../Toolbox/favouriteColor'
 
 export class ColorFiller{
 
@@ -11,10 +12,13 @@ export class ColorFiller{
      * @param {ImageData} colorLayer 
      * @param {Int8Array} selectedColor 
      */
-    fillColor(mainImgLayer,edgeLayer, colorLayer, selectedColor){
+    fillColor(mainImgLayer,edgeLayer, colorLayer){
         
         //change the color of the 
         let edgeImg = edgeLayer;
+        const selectedColor = this._colorConverter.hexToRgb(Colors.colors[Colors.selectedColorIndex]);
+        console.log(`Colors.colors[Colors.selectedColorIndex]: ${Colors.colors[Colors.selectedColorIndex]} `);
+        console.log(`Colors.selectedColorIndex: ${Colors.selectedColorIndex}`);
 
         //convert the selected color from rgb to hsl
         let selectedHsl = this._colorConverter.rgbToHsl(...selectedColor);

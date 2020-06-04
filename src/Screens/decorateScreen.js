@@ -1,11 +1,15 @@
 import {CanvasController} from "./decorateScreen/Canvas/canvas_controller";
-import {ImageLayer} from './decorateScreen/Objects/image_layer';
-import { Layers } from "./decorateScreen/Objects/layers";
+import { ToolboxController } from "./decorateScreen/Toolbox/toolbox_controller";
+import { GalleryController } from "./decorateScreen/Toolbox/gallery_controller";
 
-const canvasController = new CanvasController();
-const imgLayers = new Layers();
+const main = async () => {
+        
+    const canvasController = new CanvasController();
+    const galleryController = new GalleryController();
+    const toolboxController = new ToolboxController();
+    toolboxController.init(canvasController, galleryController);
+    galleryController.init(toolboxController);
 
-imgLayers.addImgLayer(new ImageLayer('../img/img1.jpg', canvasController));
+}
 
-canvasController.drawImage(imgLayers.getLayer().imgLayer);
-
+main();

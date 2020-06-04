@@ -58,4 +58,14 @@ export class ColorConverter{
       
         return [ h * 360, s, l ];
     }
+
+    hexToRgb(hex) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? [
+          parseInt(result[1], 16),//r
+          parseInt(result[2], 16),//g
+          parseInt(result[3], 16) //b
+        ] : [145, 197, 34];
+      }
+      
 }

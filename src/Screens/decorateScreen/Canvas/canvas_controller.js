@@ -1,7 +1,7 @@
 import {CanvasView} from "./canvas_view";
 import {ColorConverter} from "./color_converter";
-import { EdgeDetect } from "../EdgeDetection/edge_detec";
-import { Layers } from "../Objects/layers";
+import { EdgeDetect } from "./edge_detec";
+import { Layers } from "./layers";
 import { ColorFiller } from './coloring';
 
 export class CanvasController {
@@ -46,8 +46,8 @@ export class CanvasController {
     }
 
     _setupEdgeDetector(){
-        console.log(this._layers.getLayer().imgLayer);
-        this._edgeDetector.setMainImgData(this._layers.getLayer().imgLayer, this._layers.getLayer().edgeLayer);
+        console.log(this._layers.getImgLayer());
+        this._edgeDetector.setMainImgData(this._layers.getImgLayer(), this._layers.getEdgeLayer());
     }
 
     getCanvas(){
@@ -153,9 +153,9 @@ export class CanvasController {
         let mousePosition = this._getMousePosition(e);
         console.log(mousePosition);
         this._edgeDetector.detectEdge(mousePosition.x, mousePosition.y);
-        this._layers.getLayer().edgeLayer = this._edgeDetector.getEdgeData();
-        this._layers.getLayer().colorLayer = this._colorFiller.fillColor(this._layers.getLayer().imgLayer,this._layers.getLayer().edgeLayer, this._layers.getLayer().colorLayer, [145, 197, 34]);
-        this._ctx.putImageData(this._layers.getLayer().colorLayer, 0, 0);
+        this._layers.setEdgeLayer(this._edgeDetector.getEdgeData()); 
+        this._layers.setColorLayer(this._colorFiller.fillColor(this._layers.getImgLayer(),this._layers.getEdgeLayer(), this._layers.getColorLayer())); 
+        this._ctx.putImageData(this._layers.getColorLayer(), 0, 0);
 
         
         //this._ctx.putImageData(this._layers.getLayer().edgeLayer, 0, 0);

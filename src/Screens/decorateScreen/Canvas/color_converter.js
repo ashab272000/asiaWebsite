@@ -65,7 +65,7 @@ export class ColorConverter{
           parseInt(result[1], 16),//r
           parseInt(result[2], 16),//g
           parseInt(result[3], 16) //b
-        ] : null;
+        ] : [145, 197, 34];
       }
       
 }

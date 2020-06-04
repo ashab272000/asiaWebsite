@@ -24,6 +24,21 @@ export class Layers{
     getLayer(){
         return this._layers;
     }
+    getEdgeLayer(){
+        return this._layers.edgeLayer;
+    }
+    setEdgeLayer(data) {
+        this._layers.edgeLayer = data;
+    }
+    getColorLayer(){
+        return this._layers.colorLayer;
+    }
+    setColorLayer(data) {
+        this._layers.colorLayer = data;
+    }
+    getImgLayer(){
+        return this._layers.imgLayer;
+    }
 
     async getImageValue(){
         return this._image;

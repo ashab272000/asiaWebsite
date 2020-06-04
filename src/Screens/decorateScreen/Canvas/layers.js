@@ -14,7 +14,7 @@ export class Layers{
             imgLayer:null,
             history : []
         };
-        this._currentLayer = -1;
+        this._currentLayer = 0;
         this._image = {
             image: null,
             transform: null
@@ -24,12 +24,24 @@ export class Layers{
     
     addLayer(edgeData, colorData){
         //this._layers.history.push([edgeData, colorData]);
+        //create a history to replaces the this._layers.history with length + 1
         let history = this._layers.history.slice(0, this._currentLayer + 1);
+
+        //create EdgeLayer
+        //slice() is used, to copy all the values rather than referencing the cvalues
+        const edgeLayer = new ImageData(edgeData.data.slice(),edgeData.width, edgeData.height);
+        //create ColorLayer
+        const colorLayer = new ImageData(colorData.data.slice(),colorData.width, colorData.height);
+        //push the edgeLayer and colorlayer to history
         history.push([edgeData, colorData]);
-        this._currentLayer++;
         this._layers.history = history;
-        if(history.length > 2)
-            console.log(`testing ${history[this._currentLayer][1].data[103847] == history[this._currentLayer - 1][1].data[103847]}`);
+        //increment the currentlayer, currentlayer(stores index of the current color and edge layer being used)
+        this._currentLayer = this._layers.history.length - 1;
+        console.log(`addLayer -> this._currentLayer: ${this._currentLayer}`);
+        console.log(`addLayer -> this._layers.history: ${this._layers.history}`);
+        //replace the history
+        //this._layers.history = history;
+        
     }
     getEdgeLayer(){
         return this._layers.history[this._currentLayer][0];
@@ -45,9 +57,9 @@ export class Layers{
         return this._image;
     }
 
-    createLayer(imageData, edgeImageData, colorImageData){
+    createLayer(imageData){
         this._layers.imgLayer = imageData;
-        this.addLayer(edgeImageData, colorImageData);
+        this.addLayer(imageData, imageData);
 
     }
 
@@ -59,7 +71,6 @@ export class Layers{
 
     
     undo(){
-        console.log("undo is done");
         if(this._currentLayer > 0)
         {
             this._currentLayer--;
@@ -70,6 +81,7 @@ export class Layers{
     redo(){
         if(this._currentLayer < this._layers.history.length - 1){
             this._currentLayer++;
+            console.log(this._currentLayer);
         }
     }
 }

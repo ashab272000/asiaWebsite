@@ -12,3 +12,7 @@ app.use('/', express.static(__dirname + '/dist'));
 app.get('/', (req, res)=>  {
     res.sendFile(__dirname + '/dist/index.html');
   });
+
+app.get('/contacts', (req, res)=>  {
+    res.redirect('index.html#contactUs');
+});

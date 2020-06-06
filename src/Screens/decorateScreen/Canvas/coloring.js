@@ -24,10 +24,10 @@ export class ColorFiller{
         let selectedHsl = this._colorConverter.rgbToHsl(...selectedColor);
 
         //go through the all the pixels in the image
+        
         for (let i = 0; i < edgeImg.data.length; i+=4) {
             
-            if(edgeImg.data[i] == 255 && edgeImg.data[i+1] == 255 && edgeImg.data[i+2] ==255  && edgeImg.data[i+3]){
-
+            if(edgeImg.data[i] == 255 && edgeImg.data[i+1] == 255 && edgeImg.data[i+2] ==255  && edgeImg.data[i+3] == 69){
                 //convert the pixel color to hsl
                 let hsl = this._colorConverter.rgbToHsl(mainImgLayer.data[i],mainImgLayer.data[i+1], mainImgLayer.data[i+2])
     

@@ -70,11 +70,10 @@ export class CanvasView {
         this._canvas.width = this._baseCanvasWidth/innerWidthRatio;
         this._canvas.height = this._baseCanvasHeight;
             
-        //This is the original code
-        //let margin = (innerWidth - this._canvas.width - 50 - toolbox.offsetWidth)/2;
-        //due to development we are going to use a constant for now
 
-        const toolboxWidth = 100;
+
+        //hardcoded toolboxwidth constant
+        const toolboxWidth = 300;
 
         let margin = (innerWidth - this._canvas.width - 50 - toolboxWidth)/2;
 

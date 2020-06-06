@@ -35,7 +35,6 @@ export class CanvasController {
         await this._drawImage(await this._layers.getImageValue());
 
         this._setupLayers();
-        this._setupEdgeDetector();
     }
 
     _setupLayers(){
@@ -44,11 +43,6 @@ export class CanvasController {
         this._ctx.putImageData(this._layers.getColorLayer(), 0, 0);
 
     }
-
-    _setupEdgeDetector(){
-        this._edgeDetector.setMainImgData(this._layers.getImgLayer(), this._layers.getEdgeLayer());
-    }
-
     
     //load a specific image object
     async _drawImage(imageObject){
@@ -88,17 +82,16 @@ export class CanvasController {
         //get the mouse position
         let mousePosition = this._getMousePosition(e);
         //detect the edge
-        this._edgeDetector.detectEdge(mousePosition.x, mousePosition.y);
-        //get the edge data from the edge detector
-        const edgeData = this._edgeDetector.getEdgeData();
+        //and get the edge data
+        const edgeData = this._edgeDetector.detectEdge(mousePosition.x, mousePosition.y, this._layers.getEdgeLayer(), this._layers.getColorLayer());
         //get the colordata for colorfiller
-        const colorData = this._colorFiller.fillColor(this._layers.getImgLayer(),this._layers.getEdgeLayer(), this._layers.getColorLayer());
+        const colorData = this._colorFiller.fillColor(this._layers.getImgLayer(),edgeData, this._layers.getColorLayer());
         //add the data to the layer
         this._layers.addLayer(edgeData, colorData);
         // this._layers.setEdgeLayer(this._edgeDetector.getEdgeData()); 
         // this._layers.setColorLayer(this._colorFiller.fillColor(this._layers.getImgLayer(),this._layers.getEdgeLayer(), this._layers.getColorLayer())); 
         //draw the color layer
-        this._ctx.putImageData(this._layers.getColorLayer(), 0, 0);
+        this._ctx.putImageData(colorData, 0, 0);
         
         
         //this._ctx.putImageData(this._layers.getLayer().edgeLayer, 0, 0);

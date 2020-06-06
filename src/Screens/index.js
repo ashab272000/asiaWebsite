@@ -1,3 +1,4 @@
+const { setupGlide } = require("./footer");
 
 const elements= {
     colorChooseButton: document.querySelector("#colorChoose")
@@ -5,4 +6,6 @@ const elements= {
 
 elements.colorChooseButton.addEventListener("click", ()=> {
     window.location.pathname = 'dist/html/colorChoose.html';  
-})
+});
+
+setupGlide();

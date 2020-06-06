@@ -4,15 +4,15 @@ const entryPath = './src/Screens'
 module.exports = {
     //entry: './src/index.js',
     entry:{  
-            'js/main': ["babel-polyfill", `${entryPath}/index.js`],
-            'js/second': ["babel-polyfill",`${entryPath}/decorateScreen.js`],
+            'index': ["babel-polyfill", `${entryPath}/index.js`],
+            'decorateScreen': ["babel-polyfill",`${entryPath}/decorateScreen.js`],
     },
     devServer:{
         contentBase: './dist',
     },
     output: {
       filename: '[name].js',
-      path: path.resolve(__dirname, 'dist/js/trial'),
+      path: path.resolve(__dirname, 'dist/js'),
     },
     module: {
         rules: [

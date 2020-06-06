@@ -42,167 +42,72 @@ nav{
     }
 }
 
+
 footer{
     width: 100%;
-    height: 400px;
-    background-color: #383838;
-
-    h2{
-        color: white;
-        margin: 0;
-    }
-    p, a, ion-icon{
+    background-color: $textColor;
+    * {
         color: $footerTextColor;
-        margin: 0;
     }
 
-    .grid-horizontal{
+    .flex-container{
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-evenly;
-        padding: 32px;
-
-        &-item{
-            width: 300px;
-        }
     }
 
+}
 
-
-    .grid-vertical{
-        display: grid;
-        grid-template-rows: auto auto auto auto auto;
-        gap: 0px;
-
-        &-item{
-            padding: 8px 8px;
-        }
-    }
-
-    #footer-content{
-
-        &-description{
-
-            .icon-info{
-                display: flex;
-
-                ion-icon{
-                    display: inline-block;
-                    margin: 0;
-                    padding: 4px 8px 0 0 ;
-                }
-                    
+.card{
+    width: 250px;
+    margin: 16px 0;
+    .container{
+        width: 250px;
+        .card-item{
+            display: flex;
+            margin: 16px 0px;
+            ion-icon{
+                margin: 3px 8px 3px 0px;
             }
-
-        }
-        &-links{
-            grid-template-rows: repeat(5, 0.18fr);
         }
 
-        &-form{
-            #input-header{
-                padding: 0px 8px;
-                margin-bottom: 8px;
-            }
+        .link-item{
+            margin-bottom: 24px;
+        }
+    
+        form{
             .input{
-                display: flex;
-                justify-content: center;
-                padding: 8px;
+                margin: 12px 0px;
                 &-textarea{
                     padding: 8px;
                 }
             }
             #input-button{
+                display: flex;
+                justify-content: center;
                 padding: 8px 24px;
                 font-weight: 700;
-                margin: 8px;
                 color: $footerTextColor;
                 text-decoration: none;
                 background-color: $textColor;
                 border: 2px solid #222;
+                width: 100%;
+                
             }
         }
     }
 }
 
-// footer{
-//     width: 100%;
-//     height: 400px;
-//     background-color: $textColor;
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: space-around;
-//     padding: 50px 20px 0 20px;
-    
-
-//     .contact-group{
-//         display: flex;
-//         flex-direction: column;
-//         width: 220px;
-        
-//         &-card{
-//             margin: 0 0 20px 0;
-//             display: flex;
-//             &-text{
-//                 margin: 0 0 0 20px;
-//                 h2{
-//                     font-weight: 400 ;
-//                     font-size: 24px;
-//                     margin-bottom: 5px;
-//                 }
-//                 p{
-//                     color:$primaryColor;
-//                 }
-//             }
-
-//             &-icon{
-//                 width: 60px;
-//                 height: 60px;
-//                 background-color: white;
-//                 border-radius: 50%;
-//                 display: flex;
-//                 justify-content: center;
-//                 align-items: center;
-//                 margin-bottom: 20px ;
-//                 ion-icon{
-//                     font-size: 32px;
-//                     text-align: center;
-//                     color: $primaryColor;
-//                 }
-//             }
-            
-//         }
-//     }
-
-//     .v-seperator{
-//         width: 1px;
-//         height: 300px;
-//         display: block;
-//         margin: -20px 25px 0 25px;
-//         background: $primaryColor;
-//     }
-//     #link-group{
-//         width: 220px;
-//         margin:  0 0 0 25px;
-//         h2{
-//             font-size: 24px;
-//             font-weight: 400;
-//         }
-//         ul{
-        
-//             li{
-//                 a{
-//                     color: white;
-//                 }
-//                 margin: 0 0 30px 0;
-//             }
-//         }
-//     }
-// }
 @include mediaMd{
-    .grid-horizontal{
-        grid-template-rows: 1fr 1fr 1fr;
+    footer{
+        #card-flex{
+            #quick-link-card{
+                display: none;
+            }
+        }
     }
 }
+
 
 @include mediaSm{
     nav{
@@ -291,37 +196,6 @@ footer{
                     color: white;
                 }
             }
-        }
-    }
-
-    footer{
-        height: auto;
-        padding-top: 20px;
-        .contact-group{
-            margin-left: -25px;
-            &-card{
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                margin: 0 0 40px 0;
-                &-text{
-                    margin: 0;
-                    h2{
-                        text-align: center;
-                        font-size: 24px;
-                    }
-                    p{
-                        text-align: center;
-                        font-size: 16px;
-                    }
-                }
-            }
-        }
-        .v-seperator{
-            display: none;
-        }
-        #link-group{
-            display: none;
         }
     }
 }

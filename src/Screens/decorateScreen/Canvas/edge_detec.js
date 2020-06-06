@@ -26,19 +26,15 @@ export class EdgeDetect{
     /**
      * 
      * @param {ImageData} refImg 
-     * @param {ImageData} imgData 
      */
-    setMainImgData(refImg, imgData){
+    setMainImgData(refImg){
         this._refImg = refImg;
-        this._imgData = imgData;
     }
 
-    getEdgeData(){
-        return this._imgData;
-    }
-    
+    detectEdge(mouseX, mouseY, edgeImg, refImg){
 
-    detectEdge(mouseX, mouseY){
+        this._imgData = edgeImg;
+        this._refImg = refImg;
         
         //get the pixel clicked
         let pixelClicked = this._getPixelClicked(mouseX, mouseY);
@@ -48,6 +44,8 @@ export class EdgeDetect{
 
         // run the algorithim
         this._detectEdgeViaBreadth(pixelClicked, this._getComparision(refPixelHsl));
+
+        return this._imgData;
     }
 
     _detectEdgeViaBreadth(pixel, comparision){

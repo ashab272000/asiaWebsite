@@ -25,16 +25,11 @@ export class Layers{
     addLayer(edgeData, colorData){
         //this._layers.history.push([edgeData, colorData]);
         //create a history to replaces the this._layers.history with length + 1
-        let history = this._layers.history.slice(0, this._currentLayer + 1);
 
-        //create EdgeLayer
-        //slice() is used, to copy all the values rather than referencing the cvalues
-        const edgeLayer = new ImageData(edgeData.data.slice(),edgeData.width, edgeData.height);
-        //create ColorLayer
-        const colorLayer = new ImageData(colorData.data.slice(),colorData.width, colorData.height);
+        //let history = this._layers.history.slice(0, this._currentLayer + 1);
         //push the edgeLayer and colorlayer to history
-        history.push([edgeData, colorData]);
-        this._layers.history = history;
+        this._layers.history.push([edgeData, colorData]);
+        //this._layers.history = history;
         //increment the currentlayer, currentlayer(stores index of the current color and edge layer being used)
         this._currentLayer = this._layers.history.length - 1;
         console.log(`addLayer -> this._currentLayer: ${this._currentLayer}`);
@@ -44,11 +39,16 @@ export class Layers{
         
     }
     getEdgeLayer(){
-        return this._layers.history[this._currentLayer][0];
+        const imgData = this._layers.history[this._currentLayer][0];
+        const layer = new ImageData(imgData.data.slice(),imgData.width, imgData.height);
+        return layer;
     }
     getColorLayer(){
-        return this._layers.history[this._currentLayer][1];
+        const imgData = this._layers.history[this._currentLayer][1];
+        const layer = new ImageData(imgData.data.slice(),imgData.width, imgData.height);
+        return layer;
     }
+
     getImgLayer(){
         return this._layers.imgLayer;
     }
@@ -59,8 +59,10 @@ export class Layers{
 
     createLayer(imageData){
         this._layers.imgLayer = imageData;
-        this.addLayer(imageData, imageData);
+        const edgeLayer = new ImageData(imageData.data.slice(), imageData.width, imageData.height);
+        const colorLayer = new ImageData(imageData.data.slice(), imageData.width, imageData.height);
 
+        this._layers.history.push([edgeLayer, colorLayer]);
     }
 
     async addImg(src){

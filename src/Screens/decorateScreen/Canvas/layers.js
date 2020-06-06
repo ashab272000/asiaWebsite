@@ -23,20 +23,21 @@ export class Layers{
 
     
     addLayer(edgeData, colorData){
-        //this._layers.history.push([edgeData, colorData]);
-        //create a history to replaces the this._layers.history with length + 1
-
-        //let history = this._layers.history.slice(0, this._currentLayer + 1);
-        //push the edgeLayer and colorlayer to history
-        this._layers.history.push([edgeData, colorData]);
-        //this._layers.history = history;
-        //increment the currentlayer, currentlayer(stores index of the current color and edge layer being used)
-        this._currentLayer = this._layers.history.length - 1;
-        console.log(`addLayer -> this._currentLayer: ${this._currentLayer}`);
-        console.log(`addLayer -> this._layers.history: ${this._layers.history}`);
-        //replace the history
-        //this._layers.history = history;
-        
+        let compare = this._imageDataCompare(this.getColorLayer, colorData);
+        if(!compare)
+        {
+            //this._layers.history.push([edgeData, colorData]);
+            //create a history to replaces the this._layers.history with length + 1
+            let history = this._layers.history.slice(0, this._currentLayer + 1);
+            //push the edgeLayer and colorlayer to history
+            //this._imageDataCompare(currentColorData, colorData)
+            history.push([edgeData, colorData]);
+            this._layers.history = history;
+            //increment the currentlayer, currentlayer(stores index of the current color and edge layer being used)
+            this._currentLayer = this._layers.history.length - 1;
+            //replace the history
+            //this._layers.history = history;
+        }
     }
     getEdgeLayer(){
         const imgData = this._layers.history[this._currentLayer][0];
@@ -86,4 +87,22 @@ export class Layers{
             console.log(this._currentLayer);
         }
     }
+
+    _imageDataCompare(x, y) {
+        let a = x.data;
+        let b = y.data;
+        if (a === b) return true;
+        if (a == null || b == null) return false;
+        if (a.length != b.length) return false;
+      
+        // If you don't care about the order of the elements inside
+        // the array, you should sort both arrays here.
+        // Please note that calling sort on an array will modify that array.
+        // you might want to clone your array first.
+      
+        for (var i = 0; i < a.length; ++i) {
+          if (a[i] !== b[i]) return false;
+        }
+        return true;
+      }
 }

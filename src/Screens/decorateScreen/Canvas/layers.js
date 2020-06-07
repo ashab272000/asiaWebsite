@@ -23,9 +23,10 @@ export class Layers{
 
     
     addLayer(edgeData, colorData){
-        let compare = this._imageDataCompare(this.getColorLayer, colorData);
+        let compare = this._imageDataCompare(this.getColorLayer(), colorData);
         if(!compare)
         {
+            console.log(`Compare = ${compare}`)
             //this._layers.history.push([edgeData, colorData]);
             //create a history to replaces the this._layers.history with length + 1
             let history = this._layers.history.slice(0, this._currentLayer + 1);

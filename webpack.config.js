@@ -8,9 +8,10 @@ module.exports = {
             'index': ["babel-polyfill", `${entryPath}/index.js`],
             'decorateScreen': ["babel-polyfill",`${entryPath}/decorateScreen.js`],
     },
+    /*
     devServer:{
         contentBase: './dist',
-    },
+    },*/
     output: {
       filename: '[name].js',
       path: path.resolve(__dirname, 'dist/js'),

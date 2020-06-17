@@ -20,13 +20,17 @@ app.get('/contacts', (req, res)=>  {
     res.redirect('index.html#contactUs');
 });
 
-/*
+app.post('/send', async (req, res) => {
+    console.log(req.body);
+    //await sendEmail(req.body.email, req.body.message);
+});
 
-const main = async()=> {
+
+
+const sendEmail = async (email, message)=> {
  
     // Generate test SMTP service account from ethereal.email
  // Only needed if you don't have a real mail account for testing
- let testAccount = await nodemailer.createTestAccount();
 
  // create reusable transporter object using the default SMTP transport
  let transporter = nodemailer.createTransport({
@@ -34,20 +38,32 @@ const main = async()=> {
    port: 587,
    secure: false, // true for 465, false for other ports
    auth: {
-     user: testAccount.user, // generated ethereal user
-     pass: testAccount.pass, // generated ethereal password
+     user: 'madison47@ethereal.email', // generated ethereal user
+     pass: 'WafUS6FVPaJUUxW6cG', // generated ethereal password
    },
  });
 
+
+// let transporter = nodemailer.createTransport({
+//     host: "smtp.mailtrap.io",
+//     port: 2525,
+//     auth: {
+//       user: "e9472f6e10ca47",
+//       pass: "2cf9bac2e9e905"
+//     }
+//   });
+
+
  // send mail with defined transport object
  let info = await transporter.sendMail({
-   from: '"Tahia Tabassum" <foo@example.com>', // sender address
-   to: "bar@example.com, baz@example.com", // list of receivers
+   from: `Nodemailer Contact <>`, // sender address list of receivers
+   to:`${email}`,
    subject: "Hello ✔", // Subject line
-   //text: "Hello world?", // plain text body
+   text: message, // plain text body
    //html: "<b>Hello world?</b>", // html body
  });
 
+ console.log(`Info: ${info}`);
  console.log("Message sent: %s", info.messageId);
  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
@@ -56,5 +72,5 @@ const main = async()=> {
  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
 
-main();
-*/
+sendEmail("muhammedashab@gmail.com", "Test Test Test, Wait ......... Mayday Mayday Mayday, this is not a test. This is real. Mayday Waaaah");
+

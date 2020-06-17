@@ -2,9 +2,10 @@
     text-decoration: none;
     padding: 0px;
     margin: 0px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Open Sans','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
     color: $textColor;
+    
 }
 div{
     overflow: hidden;
@@ -13,4 +14,9 @@ h2{
     margin-bottom: 20px;
     color: $primaryColor;
     font-weight: 600;
+}
+
+p{
+    font-weight: 400;
+    color: #aaa;
 }

@@ -9,38 +9,40 @@
     <!-- Global site tag (gtag.js) - Google Ads: 627506530 --> 
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-627506530"></script>
     <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-627506530'); </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav>
-        <div id="mobileNavButton" class="navUnselected" onclick="navSelection()">
-            <div id="bar1" class="bar"></div>
-            <div id="bar2" class="bar"></div>
-            <div id="bar3" class="bar"></div>
+        <div class="container">
+            <div id="mobileNavButton" class="navUnselected" onclick="navSelection()">
+                <div id="bar1" class="bar"></div>
+                <div id="bar2" class="bar"></div>
+                <div id="bar3" class="bar"></div>
+            </div>
+            <h2 id="nav-branding"><a>Asia Exhibition</a></h2>
+            <ul id="mainNav">
+                <li>
+                    <a href="html/colorChoose.html">
+                        Decorate
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html#service_section">
+                        Services
+                    </a>
+                </li>
+                <li> 
+                    <a href="index.html#about">
+                        About Us
+                    </a>
+                </li>
+                <li> 
+                    <a href="index.html#contactUs">
+                        Contact Us
+                    </a>
+                </li>
+            </ul>
         </div>
-        <a><h2 id="nav-branding">Asia Exhibition</h2></a>
-        <ul id="mainNav">
-            <li>
-                <a href="html/colorChoose.html">
-                    Decorate
-                </a>
-            </li>
-            <li>
-                <a href="index.html#service_section">
-                    Services
-                </a>
-            </li>
-            <li> 
-                <a href="index.html#about">
-                    About Us
-                </a>
-            </li>
-            <li> 
-                <a href="index.html#contactUs">
-                    Contact Us
-                </a>
-            </li>
-        </ul>
     </nav>
     <div id="sildeshow">
         <div class="slideshowImg"></div>
@@ -69,9 +71,6 @@
                 tinting machine helps us to create any color your desired color with complex colors combination.
             </p>
         </div>
-        <div class="v-seperator"></div>
-        <div class="v-seperator"></div>
-        <div class="v-seperator" id="end-s"></div>
         <div class="container-img">
             <div class="about-img"></div>
         </div>
@@ -83,50 +82,14 @@
                 Services
             </h2>
         </div>
-        <div class="wwd-group">
-            <div class="wwd-group-card">
-                <div class="wwd-group-card-icon">
-                    <ion-icon name="color-fill-outline"></ion-icon>
-                </div>
-                <div class="wwd-group-card-des">
-                    <h2>
-                        DECORATIVE PAINT
-                    </h2>
-                    <p>
-                        Choose from wide range of colors. We will then produce your desired color.
-                    </p>                
-                </div>
-            </div>
-            <div class="wwd-group-card">
-                <div class="wwd-group-card-icon">
-                    <ion-icon name="color-filter-outline"></ion-icon>
-                </div>
-                <div class="wwd-group-card-des">
-                    <h2>
-                        DESIGN
-                    </h2>
-                    <p>
-                        Wide range of lady designs will help you to give your wall a unique look.
-                    </p>
-                </div>
-            </div>
-            <div class="wwd-group-card">
-                <div class="wwd-group-card-icon">
-                    <ion-icon name="hammer-outline"></ion-icon>
-                </div>
-                <div class="wwd-group-card-des">
-                    <h2>
-                        TOOLS
-                    </h2>
-                    <p>
-                        <!--
-                            We also sell all the painting tools needed. 
-                        -->
-                        Be it be rollers, be it be brush, you name the tools, we got you.
-                    </p>
-                </div>
-            </div>
-        </div>
+        <div style="height:64px;"></div> <!--Spacer-->
+        <div class="wwd-group"></div>
+            
+    </div>
+    <div style="height:64px;"></div> <!--Spacer-->
+    
+    <div id="portfolio">
+        
     </div>
 
     <footer id="contactUs">
@@ -183,17 +146,15 @@
             <div class="card">
                 <div class="container">
                     <div class="card-header"><h2>Email us</h2></div>
-                    <form>
-                        <div id="email-input card-item" class="input">
-                            <textarea name="email-input-textarea" id="email-input-textarea" class="input-textarea" cols="60" rows="2" placeholder="Enter your email address"></textarea>
-                        </div>
-                        <div id="message-input card-item" class="input">
-                            <textarea name="message-input-textarea" id="message-input-textarea" class="input-textarea" cols="60" rows="6" placeholder="Enter your message"></textarea>
-                        </div>
-                        <button id="input-button" class="card-item" type="button">
-                            Submit
-                        </button>
-                    </form>
+                    <div id="email-input" class="input card-item">
+                        <textarea name="email" id="email-input-textarea" class="input-textarea" cols="60" rows="2" placeholder="Enter your email address"></textarea>
+                    </div>
+                    <div id="message-input" class="input card-item">
+                        <textarea name="message" id="message-input-textarea" class="input-textarea" cols="60" rows="6" placeholder="Enter your message"></textarea>
+                    </div>
+                    <button id="input-button" class="card-item" >
+                        Submit
+                    </button>
                 </div>
             </div>
         </div>

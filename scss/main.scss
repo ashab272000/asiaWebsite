@@ -5,3 +5,16 @@
 @import"main/seperator";
 @import"main/about";
 @import"main/services";
+
+
+@keyframes scrollInAnimation{
+    0%{
+        transform: translateY(200px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+.scrollIn{
+    animation: scrollInAnimation 300ms ease-in-out;
+}

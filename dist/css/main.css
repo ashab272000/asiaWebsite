@@ -315,3 +315,12 @@ footer {
     align-items: center; }
     .wwd-group-card {
       margin: 10px 0px; } }
+
+@keyframes scrollInAnimation {
+  0% {
+    transform: translateY(200px); }
+  100% {
+    transform: translateY(0px); } }
+
+.scrollIn {
+  animation: scrollInAnimation 300ms ease-in-out; }

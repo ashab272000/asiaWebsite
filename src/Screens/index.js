@@ -6,6 +6,7 @@ import { setupNavBar } from './navbar';
 
 
 const colorChooseButton = document.getElementsByClassName("colorChoose");
+const scrollAnimateElements = document.getElementsByClassName("scrollAnimate");
 /*
 colorChooseButton.addEventListener("click", () => {
   window.location.pathname = "dist/html/colorChoose.html";
@@ -16,6 +17,12 @@ for (let item of colorChooseButton){
         window.location.pathname = "dist/html/colorChoose.html";
     });
 }
+
+for (let item of scrollAnimateElements){
+    item.addEventListener("click", () => {
+        window.location.pathname = "dist/html/colorChoose.html";
+    });
+} 
 
 
 

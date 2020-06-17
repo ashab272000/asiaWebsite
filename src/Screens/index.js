@@ -49,5 +49,7 @@ const serviceSection = () => {
   ));
 
 };
+
+
 navbar();
 serviceSection();

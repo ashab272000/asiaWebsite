@@ -7,8 +7,7 @@
     //border-top: 2px solid $primaryColor;
    
     &-des{
-        height: 250px;
-        width: 350px;
+        max-width: 600px;
         //max-width: 600px;
         //padding-right: 100px;
         //margin: 75px 100px 0px 0px;
@@ -17,8 +16,8 @@
 
     }
     .container-img{
-        width: 300px;
-        height: 300px;
+        width: 400px;
+        height: 400px;
 
         .about-img{
                 width: inherit;
@@ -27,7 +26,7 @@
             background: url("../img/img4.jpg");
             background-size: cover;
             background-repeat: no-repeat;
-            border-radius: 50%;
+            //border-radius: 50%;
             /*
             background-position: center;
             border: 1px solid $primaryColor;

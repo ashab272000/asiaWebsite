@@ -11,28 +11,40 @@
 </head>
 <body>
     <nav>
-        <div id="mobileNavButton" class="navSelected" onclick="navSelection()">
+        <div class="container">
+          <div
+            id="mobileNavButton"
+            class="navUnselected"
+            onclick="navSelection()"
+          >
             <div id="bar1" class="bar"></div>
             <div id="bar2" class="bar"></div>
             <div id="bar3" class="bar"></div>
+          </div>
+          <h2 id="nav-branding"><a>Asia Exhibition</a></h2>
+          <ul id="mainNav">
+            <li>
+              <a href="html/colorChoose.html">
+                Decorate
+              </a>
+            </li>
+            <li>
+              <a href="index.html#service_section">
+                Services
+              </a>
+            </li>
+            <li>
+              <a href="index.html#about">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="index.html#contactUs">
+                Contact Us
+              </a>
+            </li>
+          </ul>
         </div>
-        <a href="../index.html"><h2 id="nav-branding">Asia Exhibition</h2></a>
-        <ul id="mainNav">
-            <li>
-                <a href="colorChoose.html">Decorate</a>
-            </li>
-            <li>
-                <a href="../index.html#service_section">Services</a>
-            </li>
-            <li>
-                <a href="../index.html#about">About us</a>
-            </li>
-            <li> 
-                <a href="#contactUs">
-                    Contact Us
-                </a>
-            </li>
-        </ul>
     </nav>
     <div id="photoEditor"> 
         <div id="editor-container">

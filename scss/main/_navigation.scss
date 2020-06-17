@@ -10,10 +10,10 @@ nav{
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-        padding: 16px 96px;
+        padding: 16px $generalPadding;
         a{
             color: $primaryTextColor;
-            font-weight: 700;
+            font-weight: 600;
         }
 
         a:hover{
@@ -25,7 +25,7 @@ nav{
         }
         #nav-branding{
             a{
-                font-weight: 500;
+                font-weight: 400;
             }
             margin: 0;
         }
@@ -35,11 +35,10 @@ nav{
             justify-content: center  ;
     
             li{
-                
+                font-size: 17px;
                 padding-top: 10px;
                 padding-bottom: 8px;
                 margin: 0px 20px;
-                font-weight: 500;
             }
         }
     }
@@ -49,11 +48,6 @@ nav{
     position: fixed;
     background-color: white;
     animation: slideInNav 300ms ease-in-out;
-    .container{
-        *{
-            font-weight: 700;
-        }
-    }
 }
 
 @keyframes slideInNav{
@@ -64,9 +58,9 @@ nav{
 
 footer{
     width: 100%;
-    background-color: $textColor;
+    background-color: #eee;
     * {
-        color: $footerTextColor;
+        color: $primaryTextColor;
     }
 
     .flex-container{
@@ -117,101 +111,104 @@ footer{
 }
 
 @include mediaMd{
-    footer{
-        #card-flex{
-            #quick-link-card{
-                display: none;
-            }
-        }
+
+    .scrolledNav{
+        animation: none;
     }
-}
 
-
-@include mediaSm{
     nav{
+        background-color: white;
+        position: fixed;
         flex-direction: column;
         justify-content: center;
-        position: relative;
-        overflow: hidden;
-        background-color: $primaryTextColor;
-        height: auto;
-        padding: 0px;
+        //position: relative;
+        //overflow: hidden;
+        //background-color: $primaryTextColor;
+        //height : auto;
+        //padding: 0px;
 
-        #mainNav{
-            display: none;
-        }
+        .container{
+            #mainNav{
+                position: fixed;
+                padding-top: 100px ;
+                height: 100%;
+                width: 200px;
+                top: 0px;
+                right: 0px;
+                background-color: white;
+                transform: translate(200px, 0px);
+                transition: transform 300ms ease-in-out;
 
-        #mobileNavButton{
-            display: block;
-            position: absolute;
-            overflow: hidden;
-            right: 15px;
-            top: 7px;
-            width:50px;
-            height: 50px;
-            .bar{
+            }
+    
+            #mobileNavButton{
                 display: block;
                 position: absolute;
-                width: 30px;
-                height: 3px;
-                background: white;
-                right: 0px;
-                z-index: 10;
-                transition: transform 0.5s, opacity 0.5s, top 0.5s;
+                overflow: hidden;
+                right: 15px;
+                top: 12px;
+                width:50px;
+                height: 50px;
+                .bar{
+                    display: block;
+                    position: absolute;
+                    width: 30px;
+                    height: 3px;
+                    background: $primaryTextColor;
+                    right: 0px;
+                    z-index: 10;
+                    transition: transform 0.5s, opacity 0.5s, top 0.5s;
+                }
+                
             }
-            
-        }
-
-        .navUnselected{
-            #bar1{
-                top:10px;
-            }
-            #bar2{
-                top: 20px;
-                opacity: 1;
-            }
-            #bar3{
-                top: 30px
-            }
-        }
-        .navSelected{
-            .bar{
-                position: absolute;
-                z-index: 10;
-                top: 20px;
-            }
-            #bar2{
-                opacity: 0;
-            }
-            #bar1{
-                transform: rotate(135deg);
-            }
-            #bar3{
-                transform: rotate(-135deg);
-            }
-        }
-
-        #nav-branding{
-            width: 100%;
-            text-align: center;
-            color: white;
-            padding: 10px 0;
-            margin: 0px 0px 7px 0px;
-        }
     
-        ul{
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            //height: auto;
-            li{
+            .navUnselected{
+                #bar1{
+                    top:10px;
+                }
+                #bar2{
+                    top: 20px;
+                    opacity: 1;
+                }
+                #bar3{
+                    top: 30px
+                }
+            }
+            .navSelected{
+                .bar{
+                    position: absolute;
+                    z-index: 10;
+                    top: 20px;
+                }
+                #bar2{
+                    opacity: 0;
+                }
+                #bar1{
+                    transform: rotate(135deg);
+                }
+                #bar3{
+                    transform: rotate(-135deg);
+                }
+            }
+    
+            #nav-branding{
                 width: 100%;
                 text-align: center;
-                color: white;
-                margin: 0px;
-
-                a{
-                    color: white;
+                //padding: 10px 0;
+                margin: 0px 0px 7px 0px;
+            }
+        
+            ul{
+                display: flex;
+                position: relative;
+                flex-direction: column;
+                justify-content: start;
+                width: 100%;
+                //height: auto;
+                li{
+                    width: 100%;
+                    text-align: center;
+                    margin: 0px;
                 }
             }
         }

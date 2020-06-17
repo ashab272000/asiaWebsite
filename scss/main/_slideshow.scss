@@ -1,4 +1,14 @@
 
+.colorChoose{
+    width: 150px;
+    padding: 5px;
+    border: 2px solid $primaryTextColor;
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    color: #fff;
+    font-size: 16px;
+    text-align:center;
+}
+
 #sildeshow{
     position: relative;
     width: 100%;
@@ -25,24 +35,18 @@
             flex-direction: column;
             justify-content: center;    
             align-items: flex-start;
-            padding: 0px 96px;
+            padding: 0px $generalPadding;
             *{
                 text-align: start;
                 color: $primaryTextColor;
-                //width: 400px;
                 margin-bottom: 15px;
-                text-align: center;
 
             }
             button{
-                margin: 15px 0px;
-                width: 200px;
-                padding: 15px;
-                border: 2px solid $primaryTextColor;
-                background-color: rgba($color: #000000, $alpha: 0.2);
-                color: #fff;
-                font-size: 16px;
-                text-align:center;
+                display: block;
+                margin: 15px 15px;
+                color: white;
+                text-align: center;
             }
         }
 
@@ -51,3 +55,21 @@
     }
 
 }
+
+
+@include mediaMd{
+
+    #sildeshow {
+        .sildeshowText {
+            .container{
+                padding: 0px 32px;
+                justify-content: center;
+                align-items: center;
+                *{
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+

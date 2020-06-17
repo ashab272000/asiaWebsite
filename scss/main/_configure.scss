@@ -4,6 +4,7 @@ $secondaryColor:#fbfbfb;
 $primaryTextColor: #555;
 $secondaryTextColor: #eee;
 $textColor: #2d3436;
+$generalPadding: 96px;
 
 @mixin mediaLg{
     @media screen and (max-width: 1080px) {

@@ -2,7 +2,7 @@
   text-decoration: none;
   padding: 0px;
   margin: 0px;
-  font-family: 'Open Sans','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Open Sans','Segoe UI', sans-serif;
   overflow-x: hidden;
   color: #2d3436; }
 
@@ -41,7 +41,7 @@ nav {
     padding: 16px 96px; }
     nav .container a {
       color: #555;
-      font-weight: 700; }
+      font-weight: 600; }
     nav .container a:hover {
       color: #eee; }
     nav .container #mobileNavButton {
@@ -49,23 +49,21 @@ nav {
     nav .container #nav-branding {
       margin: 0; }
       nav .container #nav-branding a {
-        font-weight: 500; }
+        font-weight: 400; }
     nav .container ul {
       display: flex;
       align-items: baseline;
       justify-content: center; }
       nav .container ul li {
+        font-size: 17px;
         padding-top: 10px;
         padding-bottom: 8px;
-        margin: 0px 20px;
-        font-weight: 500; }
+        margin: 0px 20px; }
 
 .scrolledNav {
   position: fixed;
   background-color: white;
   animation: slideInNav 300ms ease-in-out; }
-  .scrolledNav .container * {
-    font-weight: 700; }
 
 @keyframes slideInNav {
   0% {
@@ -75,9 +73,9 @@ nav {
 
 footer {
   width: 100%;
-  background-color: #2d3436; }
+  background-color: #eee; }
   footer * {
-    color: #999; }
+    color: #555; }
   footer .flex-container {
     display: flex;
     flex-wrap: wrap;
@@ -111,78 +109,86 @@ footer {
       width: 100%; }
 
 @media screen and (max-width: 940px) {
-  footer #card-flex #quick-link-card {
-    display: none; } }
-
-@media screen and (max-width: 600px) {
+  .scrolledNav {
+    animation: none; }
   nav {
+    background-color: white;
+    position: fixed;
     flex-direction: column;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    background-color: #555;
-    height: auto;
-    padding: 0px; }
-    nav #mainNav {
-      display: none; }
-    nav #mobileNavButton {
+    justify-content: center; }
+    nav .container #mainNav {
+      position: fixed;
+      padding-top: 100px;
+      height: 100%;
+      width: 200px;
+      top: 0px;
+      right: 0px;
+      background-color: white;
+      transform: translate(200px, 0px);
+      transition: transform 300ms ease-in-out; }
+    nav .container #mobileNavButton {
       display: block;
       position: absolute;
       overflow: hidden;
       right: 15px;
-      top: 7px;
+      top: 12px;
       width: 50px;
       height: 50px; }
-      nav #mobileNavButton .bar {
+      nav .container #mobileNavButton .bar {
         display: block;
         position: absolute;
         width: 30px;
         height: 3px;
-        background: white;
+        background: #555;
         right: 0px;
         z-index: 10;
         transition: transform 0.5s, opacity 0.5s, top 0.5s; }
-    nav .navUnselected #bar1 {
+    nav .container .navUnselected #bar1 {
       top: 10px; }
-    nav .navUnselected #bar2 {
+    nav .container .navUnselected #bar2 {
       top: 20px;
       opacity: 1; }
-    nav .navUnselected #bar3 {
+    nav .container .navUnselected #bar3 {
       top: 30px; }
-    nav .navSelected .bar {
+    nav .container .navSelected .bar {
       position: absolute;
       z-index: 10;
       top: 20px; }
-    nav .navSelected #bar2 {
+    nav .container .navSelected #bar2 {
       opacity: 0; }
-    nav .navSelected #bar1 {
+    nav .container .navSelected #bar1 {
       transform: rotate(135deg); }
-    nav .navSelected #bar3 {
+    nav .container .navSelected #bar3 {
       transform: rotate(-135deg); }
-    nav #nav-branding {
+    nav .container #nav-branding {
       width: 100%;
       text-align: center;
-      color: white;
-      padding: 10px 0;
       margin: 0px 0px 7px 0px; }
-    nav ul {
+    nav .container ul {
       display: flex;
+      position: relative;
       flex-direction: column;
+      justify-content: start;
       width: 100%; }
-      nav ul li {
+      nav .container ul li {
         width: 100%;
         text-align: center;
-        color: white;
-        margin: 0px; }
-        nav ul li a {
-          color: white; } }
+        margin: 0px; } }
 
 #canvas {
   position: relative; }
 
+#helpBanner {
+  display: flex;
+  background-color: #eee;
+  justify-content: space-evenly;
+  padding: 32px;
+  flex-wrap: wrap; }
+  #helpBanner div {
+    padding: 8px; }
+
 #photoEditor {
   width: 100vw;
-  padding: 100px 0px 100px 0px;
   display: block; }
   #photoEditor #editor-container {
     width: 100%; }
@@ -309,6 +315,8 @@ footer {
       margin: 8vh 15% 2vh 15%; }
 
 @media screen and (max-width: 940px) {
+  #helpBanner {
+    flex-direction: column; }
   #photoEditor {
     height: auto;
     padding-bottom: 50px; }

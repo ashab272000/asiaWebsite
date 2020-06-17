@@ -2,15 +2,26 @@
 @import"main/base";
 @import"main/navigation";
 
+
 #canvas{
     position: relative;
+}
+
+#helpBanner{
+    display: flex;
+    background-color: #eee;
+    justify-content: space-evenly;
+    padding: 32px;
+    flex-wrap: wrap;
+
+    div{
+        padding: 8px;
+    }
 }
 
 #photoEditor{
 
     width: 100vw;
-    //height: calc(100vh - 100px);
-    padding: 100px 0px 100px 0px;
     //background-color: rgb(146, 143, 143);
     display: block;
 
@@ -179,6 +190,9 @@
 
 @include mediaMd{
 
+    #helpBanner{
+        flex-direction: column;
+    }
         
     #photoEditor{
         height:  auto;

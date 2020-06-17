@@ -2,7 +2,7 @@
     text-decoration: none;
     padding: 0px;
     margin: 0px;
-    font-family: 'Open Sans','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Open Sans','Segoe UI', sans-serif ;
     overflow-x: hidden;
     color: $textColor;
     
@@ -33,4 +33,9 @@ h2{
 p{
     font-weight: 400;
     color: #aaa;
+}
+
+@include mediaSm{
+
+    $generalpadding:32px;
 }

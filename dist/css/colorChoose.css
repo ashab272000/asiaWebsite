@@ -2,52 +2,80 @@
   text-decoration: none;
   padding: 0px;
   margin: 0px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Open Sans','Segoe UI', sans-serif;
   overflow-x: hidden;
   color: #2d3436; }
 
 div {
   overflow: hidden; }
 
+.headline {
+  display: flex;
+  justify-content: center; }
+  .headline h2 {
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    padding-top: 5px;
+    background: white; }
+
 h2 {
   margin-bottom: 20px;
-  color: #6495ED;
+  color: #555;
   font-weight: 600; }
+
+p {
+  font-weight: 400;
+  color: #aaa; }
 
 nav {
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
   width: 100%;
-  height: 70px;
-  padding: 10px 0;
-  z-index: 1; }
-  nav #mobileNavButton {
-    display: none; }
-  nav #nav-branding {
-    padding-top: 0px;
-    margin-right: 20px;
-    color: #6495ED;
-    font-weight: 500; }
-  nav ul {
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0);
+  transition: background-color 300ms ease-in-out; }
+  nav .container {
     display: flex;
+    justify-content: space-between;
     align-items: baseline;
-    justify-content: center; }
-    nav ul li {
-      padding-top: 10px;
-      padding-bottom: 8px;
-      margin: 0px 20px;
-      color: #6495ED;
-      font-weight: 500; }
-      nav ul li a {
-        color: #6495ED; }
+    padding: 16px 96px; }
+    nav .container a {
+      color: #555;
+      font-weight: 600; }
+    nav .container a:hover {
+      color: #eee; }
+    nav .container #mobileNavButton {
+      display: none; }
+    nav .container #nav-branding {
+      margin: 0; }
+      nav .container #nav-branding a {
+        font-weight: 400; }
+    nav .container ul {
+      display: flex;
+      align-items: baseline;
+      justify-content: center; }
+      nav .container ul li {
+        font-size: 17px;
+        padding-top: 10px;
+        padding-bottom: 8px;
+        margin: 0px 20px; }
+
+.scrolledNav {
+  position: fixed;
+  background-color: white;
+  animation: slideInNav 300ms ease-in-out; }
+
+@keyframes slideInNav {
+  0% {
+    transform: translate(0, -80px); }
+  100% {
+    transform: translate(0, 0px); } }
 
 footer {
   width: 100%;
-  background-color: #2d3436; }
+  background-color: #eee; }
   footer * {
-    color: #999; }
+    color: #555; }
   footer .flex-container {
     display: flex;
     flex-wrap: wrap;
@@ -65,11 +93,11 @@ footer {
         margin: 3px 8px 3px 0px; }
     .card .container .link-item {
       margin-bottom: 24px; }
-    .card .container form .input {
+    .card .container .input {
       margin: 12px 0px; }
-      .card .container form .input-textarea {
+      .card .container .input-textarea {
         padding: 8px; }
-    .card .container form #input-button {
+    .card .container #input-button {
       display: flex;
       justify-content: center;
       padding: 8px 24px;
@@ -81,97 +109,104 @@ footer {
       width: 100%; }
 
 @media screen and (max-width: 940px) {
-  footer #card-flex #quick-link-card {
-    display: none; } }
-
-@media screen and (max-width: 600px) {
+  .scrolledNav {
+    animation: none; }
   nav {
+    background-color: white;
+    position: fixed;
     flex-direction: column;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    background-color: #6495ED;
-    height: auto;
-    padding: 0px; }
-    nav #mainNav {
-      display: none; }
-    nav #mobileNavButton {
+    justify-content: center; }
+    nav .container #mainNav {
+      position: fixed;
+      padding-top: 100px;
+      height: 100%;
+      width: 200px;
+      top: 0px;
+      right: 0px;
+      background-color: white;
+      transform: translate(200px, 0px);
+      transition: transform 300ms ease-in-out; }
+    nav .container #mobileNavButton {
       display: block;
       position: absolute;
       overflow: hidden;
       right: 15px;
-      top: 7px;
+      top: 12px;
       width: 50px;
       height: 50px; }
-      nav #mobileNavButton .bar {
+      nav .container #mobileNavButton .bar {
         display: block;
         position: absolute;
         width: 30px;
         height: 3px;
-        background: white;
+        background: #555;
         right: 0px;
         z-index: 10;
         transition: transform 0.5s, opacity 0.5s, top 0.5s; }
-    nav .navUnselected #bar1 {
+    nav .container .navUnselected #bar1 {
       top: 10px; }
-    nav .navUnselected #bar2 {
+    nav .container .navUnselected #bar2 {
       top: 20px;
       opacity: 1; }
-    nav .navUnselected #bar3 {
+    nav .container .navUnselected #bar3 {
       top: 30px; }
-    nav .navSelected .bar {
+    nav .container .navSelected .bar {
       position: absolute;
       z-index: 10;
       top: 20px; }
-    nav .navSelected #bar2 {
+    nav .container .navSelected #bar2 {
       opacity: 0; }
-    nav .navSelected #bar1 {
+    nav .container .navSelected #bar1 {
       transform: rotate(135deg); }
-    nav .navSelected #bar3 {
+    nav .container .navSelected #bar3 {
       transform: rotate(-135deg); }
-    nav #nav-branding {
+    nav .container #nav-branding {
       width: 100%;
       text-align: center;
-      color: white;
-      padding: 10px 0;
       margin: 0px 0px 7px 0px; }
-    nav ul {
+    nav .container ul {
       display: flex;
+      position: relative;
       flex-direction: column;
+      justify-content: start;
       width: 100%; }
-      nav ul li {
+      nav .container ul li {
         width: 100%;
         text-align: center;
-        color: white;
-        margin: 0px; }
-        nav ul li a {
-          color: white; } }
+        margin: 0px; } }
 
 #canvas {
   position: relative; }
 
+#helpBanner {
+  display: flex;
+  background-color: #eee;
+  justify-content: space-evenly;
+  padding: 32px;
+  flex-wrap: wrap; }
+  #helpBanner div {
+    padding: 8px; }
+
 #photoEditor {
   width: 100vw;
-  padding: 100px 0px 100px 0px;
-  background-color: #222;
   display: block; }
   #photoEditor #editor-container {
     width: 100%; }
   #photoEditor-canvas {
     float: left;
-    border: 2px solid #6495ED;
+    border: 2px solid #555;
     margin-right: 50px; }
   #photoEditor-toolbox {
     float: left;
     margin: 0px;
     width: 300px;
-    border: 2px solid #6495ED;
+    border: 2px solid #555;
     justify-content: center; }
     #photoEditor-toolbox-colors {
       margin-top: 0px;
       display: block;
       height: 200px;
-      border-bottom: 1px solid #6495ED;
+      border-bottom: 1px solid #555;
       overflow-y: auto; }
       #photoEditor-toolbox-colors .fav {
         display: flex;
@@ -183,15 +218,15 @@ footer {
         #photoEditor-toolbox-colors .fav .favColor {
           margin-right: 30px;
           margin-left: 30px;
-          border: 1px solid #6495ED; }
+          border: 1px solid #555; }
         #photoEditor-toolbox-colors .fav h4 {
           width: 120px;
-          color: #6495ED;
+          color: #555;
           margin-top: 10px;
           text-align: center;
           vertical-align: center; }
       #photoEditor-toolbox-colors .selected {
-        background-color: #6495ED; }
+        background-color: #555; }
         #photoEditor-toolbox-colors .selected .favColor {
           border-color: white; }
         #photoEditor-toolbox-colors .selected h4 {
@@ -206,7 +241,7 @@ footer {
       #photoEditor-toolbox-upload button {
         margin: 10px;
         background: none;
-        border: 1px solid #6495ED;
+        border: 1px solid #555;
         width: 200px;
         display: flex;
         justify-content: center;
@@ -216,9 +251,9 @@ footer {
           margin: 0px 5px; }
         #photoEditor-toolbox-upload button ion-icon {
           font-size: 32px;
-          color: #6495ED; }
+          color: #555; }
       #photoEditor-toolbox-upload button:hover {
-        background-color: #6495ED; }
+        background-color: #555; }
         #photoEditor-toolbox-upload button:hover * {
           color: white; }
 
@@ -280,6 +315,8 @@ footer {
       margin: 8vh 15% 2vh 15%; }
 
 @media screen and (max-width: 940px) {
+  #helpBanner {
+    flex-direction: column; }
   #photoEditor {
     height: auto;
     padding-bottom: 50px; }

@@ -1,39 +1,35 @@
 
 .about{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 100px 0px;
-    //border-top: 2px solid $primaryColor;
+    justify-content: space-between;
+    
+    margin: 0px $generalPadding;
    
     &-des{
-        height: 250px;
-        width: 400px;
-        //padding-right: 100px;
-        margin: 75px 100px 0px 0px;
+        max-width: 600px;
+        padding: 0px 32px;
 
     }
-    #end-s{
-        margin-right: 50px;
-
-    }
-    &-img{
-        width: 300px;
-        height: 300px;
-
-        //background-color: rgba($color: $primaryColor, $alpha: 1.0);
-        background: url("../img/img4.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        border-radius: 50%;
-        border: 1px solid $primaryColor;
-        //margin: -50px;
-    }
-
     .container-img{
-        width: auto;
+        border: 2px solid #eee;
+        width: 400px;
+        height: 400px;
+        .about-img{
+            height: inherit;
+            object-fit: scale-down;
+            object-position: center;
+        }
+    }
+}
+
+#homeEditorDesc{
+    .container-img{
+        width: 600px;
         height: auto;
+        .about-img{
+            height: auto;
+            width: inherit;
+        }
     }
 }
 
@@ -41,6 +37,10 @@
 
     .about{
         flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+
+        margin: 0 32px;
 
         #end-s{
             margin: 0px;
@@ -51,12 +51,31 @@
            
         &-des{
             height: auto;
-            width: 60%;
             //padding-right: 100px;
-            text-align: center;
+            text-align: justify;
             margin: 40px 0px 75px 0px;
+
+            h2{
+                text-align: center;
+            }
 
         }
 
+    }
+
+    #homeEditorDesc{
+
+        .colorChoose{
+            width: 100%;
+        }
+        .container-img{
+            width: auto;
+            height: 500px;
+            .about-img{
+                //width: auto;
+                height: inherit;
+                content: url("../img/homeEditorMobile.jpg");
+            }
+        }
     }
 }

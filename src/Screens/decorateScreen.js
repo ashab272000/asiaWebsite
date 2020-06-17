@@ -1,6 +1,7 @@
 import {CanvasController} from "./decorateScreen/Canvas/canvas_controller";
 import { ToolboxController } from "./decorateScreen/Toolbox/toolbox_controller";
 import { GalleryController } from "./decorateScreen/Toolbox/gallery_controller";
+import { setupNavBar } from './navbar';
 
 const main = async () => {
         
@@ -11,5 +12,5 @@ const main = async () => {
     galleryController.init(toolboxController);
 
 }
-
+setupNavBar("..\/");
 main();

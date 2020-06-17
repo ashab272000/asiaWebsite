@@ -3,6 +3,7 @@ const path = require('path');
 const entryPath = './src/Screens'
 module.exports = {
     //entry: './src/index.js',
+    watch: true,
     entry:{  
             'index': ["babel-polyfill", `${entryPath}/index.js`],
             'decorateScreen': ["babel-polyfill",`${entryPath}/decorateScreen.js`],

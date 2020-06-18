@@ -5,7 +5,8 @@ nav{
     width: 100%;
     z-index: 2;
     background-color: rgba($color: #fff, $alpha: 0);
-    transition: background-color 300ms ease-in-out;
+    //transition: background-color 300ms ease-in-out;
+    @include compTransition(background-color, 300ms, ease-in-out);
     .container{
         display: flex;
         justify-content: space-between;
@@ -47,7 +48,8 @@ nav{
 .scrolledNav{
     position: fixed;
     background-color: white;
-    animation: slideInNav 300ms ease-in-out;
+    @include compAnimation(slideInNav, 300ms, ease-in-out);
+    //animation: slideInNav 300ms ease-in-out;
 }
 
 @keyframes slideInNav{
@@ -137,12 +139,14 @@ footer{
                 right: 0px;
                 background-color: white;
                 transform: translate(200px, 0px);
-                transition: transform 300ms ease-in-out;
+                //transition: transform 300ms ease-in-out;
+                @include compTransition(transform, 300ms, ease-in-out);
 
             }
     
             #mobileNavButton{
                 display: block;
+                background-color: white;
                 position: absolute;
                 overflow: hidden;
                 right: 15px;

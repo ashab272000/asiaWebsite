@@ -138,7 +138,10 @@ footer{
                 top: 0px;
                 right: 0px;
                 background-color: white;
-                transform: translate(200px, 0px);
+                -webkit-transform: translateX(200px);
+                -moz-transform: translateX(200px);
+                -o-transform: translateX(200px);
+                transform: translateX(200px);
                 //transition: transform 300ms ease-in-out;
                 @include compTransitionTransfrom(300ms, ease-in-out);
 

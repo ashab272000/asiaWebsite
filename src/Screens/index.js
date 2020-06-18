@@ -14,15 +14,9 @@ colorChooseButton.addEventListener("click", () => {
 
 for (let item of colorChooseButton){
     item.addEventListener("click", () => {
-        window.location.pathname = "dist/html/colorChoose.html";
+        window.location.pathname = "html/colorChoose.html";
     });
 }
-
-for (let item of scrollAnimateElements){
-    item.addEventListener("click", () => {
-        window.location.pathname = "dist/html/colorChoose.html";
-    });
-} 
 
 
 

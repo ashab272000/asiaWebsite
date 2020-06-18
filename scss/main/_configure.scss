@@ -24,3 +24,15 @@ $generalPadding: 96px;
         @content;
     }
 }
+
+@mixin compAnimation($value, $time, $curve){
+    -webkit-animation: $value $time $curve;
+    -moz-animation: $value $time $curve;
+    -o-animation: $value $time $curve;
+}
+
+@mixin compTransition($value, $time, $curve){
+    -webkit-transition: $value $time $curve;
+    -moz-transition: $value $time $curve;
+    -o-transition: $value $time $curve;
+}

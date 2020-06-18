@@ -29,10 +29,19 @@ $generalPadding: 96px;
     -webkit-animation: $value $time $curve;
     -moz-animation: $value $time $curve;
     -o-animation: $value $time $curve;
+    animation: $value $time $curve;
 }
 
 @mixin compTransition($value, $time, $curve){
     -webkit-transition: $value $time $curve;
     -moz-transition: $value $time $curve;
     -o-transition: $value $time $curve;
+    transition: $value $time $curve;
+}
+
+@mixin compTransitionTransfrom($time, $curve){
+    -webkit-transition: -webkit-transform $time $curve;
+    -moz-transition: -moz-transform $time $curve;
+    -o-transition: -o-transform $time $curve;
+    transition: transform $time $curve;
 }

@@ -35,7 +35,8 @@ nav {
   background-color: rgba(255, 255, 255, 0);
   -webkit-transition: background-color 300ms ease-in-out;
   -moz-transition: background-color 300ms ease-in-out;
-  -o-transition: background-color 300ms ease-in-out; }
+  -o-transition: background-color 300ms ease-in-out;
+  transition: background-color 300ms ease-in-out; }
   nav .container {
     display: flex;
     justify-content: space-between;
@@ -67,7 +68,8 @@ nav {
   background-color: white;
   -webkit-animation: slideInNav 300ms ease-in-out;
   -moz-animation: slideInNav 300ms ease-in-out;
-  -o-animation: slideInNav 300ms ease-in-out; }
+  -o-animation: slideInNav 300ms ease-in-out;
+  animation: slideInNav 300ms ease-in-out; }
 
 @keyframes slideInNav {
   0% {
@@ -129,9 +131,10 @@ footer {
       right: 0px;
       background-color: white;
       transform: translate(200px, 0px);
-      -webkit-transition: transform 300ms ease-in-out;
-      -moz-transition: transform 300ms ease-in-out;
-      -o-transition: transform 300ms ease-in-out; }
+      -webkit-transition: -webkit-transform 300ms ease-in-out;
+      -moz-transition: -moz-transform 300ms ease-in-out;
+      -o-transition: -o-transform 300ms ease-in-out;
+      transition: transform 300ms ease-in-out; }
     nav .container #mobileNavButton {
       display: block;
       background-color: white;

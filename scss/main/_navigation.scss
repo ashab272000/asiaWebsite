@@ -123,6 +123,7 @@ footer{
         position: fixed;
         flex-direction: column;
         justify-content: center;
+        overflow: visible;
         //position: relative;
         //overflow: hidden;
         //background-color: $primaryTextColor;
@@ -130,6 +131,7 @@ footer{
         //padding: 0px;
 
         .container{
+            overflow: visible;
             #mainNav{
                 position: fixed;
                 padding-top: 100px ;

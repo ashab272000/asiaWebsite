@@ -121,71 +121,74 @@ footer {
     background-color: white;
     position: fixed;
     flex-direction: column;
-    justify-content: center; }
-    nav .container #mainNav {
-      position: fixed;
-      padding-top: 100px;
-      height: 100%;
-      width: 200px;
-      top: 0px;
-      right: 0px;
-      background-color: white;
-      -webkit-transform: translateX(200px);
-      -moz-transform: translateX(200px);
-      -o-transform: translateX(200px);
-      transform: translateX(200px);
-      -webkit-transition: -webkit-transform 300ms ease-in-out;
-      -moz-transition: -moz-transform 300ms ease-in-out;
-      -o-transition: -o-transform 300ms ease-in-out;
-      transition: transform 300ms ease-in-out; }
-    nav .container #mobileNavButton {
-      display: block;
-      background-color: white;
-      position: absolute;
-      right: 15px;
-      top: 12px;
-      width: 50px;
-      height: 50px; }
-      nav .container #mobileNavButton .bar {
-        display: block;
-        position: absolute;
-        width: 30px;
-        height: 3px;
-        background: #555;
+    justify-content: center;
+    overflow: visible; }
+    nav .container {
+      overflow: visible; }
+      nav .container #mainNav {
+        position: fixed;
+        padding-top: 100px;
+        height: 100%;
+        width: 200px;
+        top: 0px;
         right: 0px;
+        background-color: white;
+        -webkit-transform: translateX(200px);
+        -moz-transform: translateX(200px);
+        -o-transform: translateX(200px);
+        transform: translateX(200px);
+        -webkit-transition: -webkit-transform 300ms ease-in-out;
+        -moz-transition: -moz-transform 300ms ease-in-out;
+        -o-transition: -o-transform 300ms ease-in-out;
+        transition: transform 300ms ease-in-out; }
+      nav .container #mobileNavButton {
+        display: block;
+        background-color: white;
+        position: absolute;
+        right: 15px;
+        top: 12px;
+        width: 50px;
+        height: 50px; }
+        nav .container #mobileNavButton .bar {
+          display: block;
+          position: absolute;
+          width: 30px;
+          height: 3px;
+          background: #555;
+          right: 0px;
+          z-index: 10;
+          transition: transform 0.5s, opacity 0.5s, top 0.5s; }
+      nav .container .navUnselected #bar1 {
+        top: 10px; }
+      nav .container .navUnselected #bar2 {
+        top: 20px;
+        opacity: 1; }
+      nav .container .navUnselected #bar3 {
+        top: 30px; }
+      nav .container .navSelected .bar {
+        position: absolute;
         z-index: 10;
-        transition: transform 0.5s, opacity 0.5s, top 0.5s; }
-    nav .container .navUnselected #bar1 {
-      top: 10px; }
-    nav .container .navUnselected #bar2 {
-      top: 20px;
-      opacity: 1; }
-    nav .container .navUnselected #bar3 {
-      top: 30px; }
-    nav .container .navSelected .bar {
-      position: absolute;
-      z-index: 10;
-      top: 20px; }
-    nav .container .navSelected #bar2 {
-      opacity: 0; }
-    nav .container .navSelected #bar1 {
-      transform: rotate(135deg); }
-    nav .container .navSelected #bar3 {
-      transform: rotate(-135deg); }
-    nav .container #nav-branding {
-      width: 100%;
-      text-align: center;
-      margin: 0px 0px 7px 0px; }
-    nav .container ul {
-      display: flex;
-      position: relative;
-      flex-direction: column;
-      justify-content: start;
-      width: 100%; }
-      nav .container ul li {
+        top: 20px; }
+      nav .container .navSelected #bar2 {
+        opacity: 0; }
+      nav .container .navSelected #bar1 {
+        transform: rotate(135deg); }
+      nav .container .navSelected #bar3 {
+        transform: rotate(-135deg); }
+      nav .container #nav-branding {
         width: 100%;
         text-align: center;
-        margin: 0px; } }
+        margin: 0px 0px 7px 0px; }
+      nav .container ul {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: start;
+        width: 100%; }
+        nav .container ul li {
+          width: 100%;
+          text-align: center;
+          margin: 0px; } }
 
 #canvas {
   position: relative; }

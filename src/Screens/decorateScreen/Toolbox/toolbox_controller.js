@@ -1,5 +1,7 @@
 import { ToolboxView } from "./tollbox_view";
 import { FavouriteColors } from './favouriteColor';
+import { Layers } from "../Canvas/layers";
+import { CanvasController } from "../Canvas/canvas_controller";
 
 export class ToolboxController {
 
@@ -25,6 +27,21 @@ export class ToolboxController {
         
 
     _setupListeners(){
+
+        this._toolboxView.uploadButton.addEventListener('click', () => {
+            this._toolboxView.uploadInput.click();
+        });
+        
+        this._toolboxView.uploadInput.addEventListener('change', (event) => {
+            
+            var fr = new FileReader();
+            fr.onload = async () => {
+                //console.log(fr.result.toString());
+                await new CanvasController().addImageToCanvas(fr.result);   
+            }
+            fr.readAsDataURL(event.target.files[0]);
+        }, false);
+
         
         this._toolboxView.chooseColorButton.addEventListener("click", ()=>{
             this._galleryController.openGallery();
@@ -35,7 +52,6 @@ export class ToolboxController {
         });
 
         this._toolboxView.redoButton.addEventListener("click", () => {
-            console.log('redo is done');
             this._canvasController.redo();
         });
     }

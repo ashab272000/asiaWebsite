@@ -71,6 +71,3 @@ const sendEmail = async (email, message)=> {
  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
-
-sendEmail("muhammedashab@gmail.com", "Test Test Test, Wait ......... Mayday Mayday Mayday, this is not a test. This is real. Mayday Waaaah");
-

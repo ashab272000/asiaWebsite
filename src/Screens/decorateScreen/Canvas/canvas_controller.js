@@ -8,6 +8,11 @@ export class CanvasController {
     
 
     constructor() {
+        if(CanvasController._instance){
+            return CanvasController._instance;
+        }
+
+        CanvasController._instance = this;
         this._canvasView = new CanvasView();
         
         //values of the canvas DOM object
@@ -27,6 +32,12 @@ export class CanvasController {
 
         this._setupListeners();
         this._setupCanvas().then();
+    }
+
+    async addImageToCanvas(src){
+        await this._layers.addImg(src);
+        await this._drawImage(await this._layers.getImageValue());
+        this._setupLayers();
     }
 
     async _setupCanvas(){
@@ -52,7 +63,7 @@ export class CanvasController {
         this._canvasView.clearCanvas();
         
         //create a new image object with the src specified
-        let img = await  imageObject.image;
+        let img = await imageObject.image;
         let imgTransform = await imageObject.transform;
         
         this._ctx.drawImage(img, imgTransform.x, imgTransform.y, imgTransform.width, imgTransform.height);
@@ -63,7 +74,6 @@ export class CanvasController {
         //this._ctx.getImageData(0, 0, this._canvas.width, this._canvas.height);
         return this._ctx.getImageData(0, 0, this._canvas.width, this._canvas.height);
     }
-    
     
     _canvasClicked(e){
         
@@ -96,7 +106,7 @@ export class CanvasController {
         
         //this._ctx.putImageData(this._layers.getLayer().edgeLayer, 0, 0);
         
-    };
+    }
     
     _getMousePosition(e){
         const editor = this._canvasView.getEditor();

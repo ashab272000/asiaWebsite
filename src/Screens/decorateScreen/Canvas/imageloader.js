@@ -30,7 +30,6 @@ export class ImageLoader{
         this._imagePromise = new Promise(
             resolve => {
                 img.onload = () => {
-            
                     let transform = this._getImageTransform(img.width, img.height)
                     img.width = transform.width;
                     img.height= transform.height;

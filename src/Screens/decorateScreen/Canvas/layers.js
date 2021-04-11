@@ -4,9 +4,14 @@ import { ImageLoader } from "./imageloader";
 
 
 export class Layers{
+   
 
     constructor(canvasWidth, canvasHeight)
     {   
+        if(Layers._instance){
+            return Layers._instance;
+        }
+        Layers._instance = this;
         this._canvasWidth = canvasWidth;
         this._canvasHeight = canvasHeight;
         this._imageLoader = new ImageLoader(canvasWidth, canvasHeight);
@@ -26,7 +31,6 @@ export class Layers{
         let compare = this._imageDataCompare(this.getColorLayer(), colorData);
         if(!compare)
         {
-            console.log(`Compare = ${compare}`)
             //this._layers.history.push([edgeData, colorData]);
             //create a history to replaces the this._layers.history with length + 1
             let history = this._layers.history.slice(0, this._currentLayer + 1);
@@ -40,11 +44,13 @@ export class Layers{
             //this._layers.history = history;
         }
     }
+
     getEdgeLayer(){
         const imgData = this._layers.history[this._currentLayer][0];
         const layer = new ImageData(imgData.data.slice(),imgData.width, imgData.height);
         return layer;
     }
+    
     getColorLayer(){
         const imgData = this._layers.history[this._currentLayer][1];
         const layer = new ImageData(imgData.data.slice(),imgData.width, imgData.height);
@@ -63,9 +69,10 @@ export class Layers{
         this._layers.imgLayer = imageData;
         const edgeLayer = new ImageData(imageData.data.slice(), imageData.width, imageData.height);
         const colorLayer = new ImageData(imageData.data.slice(), imageData.width, imageData.height);
-
         this._layers.history.push([edgeLayer, colorLayer]);
+        this._currentLayer = this._layers.history.length - 1;
     }
+
 
     async addImg(src){
         await this._imageLoader._loadImageData(src);
@@ -78,14 +85,12 @@ export class Layers{
         if(this._currentLayer > 0)
         {
             this._currentLayer--;
-            console.log(this._currentLayer);
         }
     }
 
     redo(){
         if(this._currentLayer < this._layers.history.length - 1){
             this._currentLayer++;
-            console.log(this._currentLayer);
         }
     }
 

@@ -8,7 +8,7 @@ $generalPadding: 96px;
 
 @mixin mediaLg{
     @media screen and (max-width: 1080px) {
-        
+        @content;
     }
 }
 

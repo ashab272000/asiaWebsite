@@ -10,6 +10,36 @@
 div{
     overflow: hidden;
 }
+
+.container-full{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100vh;
+}
+
+.stack{
+    position: relative;
+    width: inherit;
+    height: inherit;
+    .positioned{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.flex-container{
+    display: flex;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+
+}
 .headline{
 
     display: flex;
